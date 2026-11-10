@@ -43,6 +43,10 @@
             <button class="tab-btn" onclick="openTool('pdf-tool')">📄 PDF Merge</button>
             <button class="tab-btn" onclick="openTool('hash-gen')">🔒 Hash Gen</button>
             <button class="tab-btn" onclick="openTool('meta-analyzer')">🔍 Meta Analyzer</button>
+                    <button class="tab-btn" onclick="openTool('color-picker')">🎨 Color Picker</button>
+        <button class="tab-btn" onclick="openTool('unit-converter')">📏 Unit Converter</button>
+        <button class="tab-btn" onclick="openTool('stopwatch')">⏱️ Stopwatch</button>
+
         </div>
     </div>
 
@@ -126,6 +130,57 @@
         <p style="font-size: 14px; color: #666; margin-top: 15px; padding: 10px; text-align: left;">Scan and optimize your website's SEO meta titles, descriptions, and keywords.</p>
 
     </div>
+    <!-- 8. COLOR CODE CONVERTER & PICKER -->
+<div id="color-picker" class="tool-card">
+    <h2>🎨 Color Code Converter & Picker</h2>
+    <label>Select a Color:</label>
+    <input type="color" id="colorPicker" value="#007bff" oninput="convertColor()">
+    <div class="result-box">
+        HEX: <span id="hexResult">#007bff</span><br>
+        RGB: <span id="rgbResult">rgb(0, 123, 255)</span>
+    </div>
+    <div class="seo-description">
+        Easily convert web design formats with our online Color Code Converter and Picker tool. Designers and developers can select any shade visually to instantly grab both HEX and RGB values. This eliminates guessing work and speeds up styling tasks for frontend development, digital arts, and CSS interface customization.
+    </div>
+</div>
+
+<!-- 9. SMART UNIT CONVERTER -->
+<div id="unit-converter" class="tool-card">
+    <h2>📏 Smart Unit Converter</h2>
+    <label>Value to Convert:</label>
+    <input type="number" id="unitValue" value="1" oninput="runConversion()">
+    <label>From:</label>
+    <select id="unitFrom" onchange="runConversion()">
+        <option value="m">Meters</option>
+        <option value="km">Kilometers</option>
+        <option value="mi">Miles</option>
+    </select>
+    <label>To:</label>
+    <select id="unitTo" onchange="runConversion()">
+        <option value="m">Meters</option>
+        <option value="km">Kilometers</option>
+        <option value="mi">Miles</option>
+    </select>
+    <div id="unitResult" class="result-box">Result: 1.00 m</div>
+    <div class="seo-description">
+        Perform swift calculations across different metric and imperial units using our Smart Unit Converter. Ideal for students, engineers, and travelers who need to switch measurements between meters, kilometers, and miles accurately. It handles immediate real-time rendering inside your local web interface.
+    </div>
+</div>
+
+<!-- 10. STOPWATCH & PRECISION TIMER -->
+<div id="stopwatch" class="tool-card">
+    <h2>⏱️ Stopwatch & Precision Timer</h2>
+    <div id="stopwatchDisplay" class="stopwatch-display" style="font-size: 2rem; font-weight: bold; text-align: center; margin: 20px 0; color: #222;">00:00:00.00</div>
+    <div class="btn-group" style="display: flex; gap: 10px;">
+        <button class="action-btn" onclick="startStopwatch()">Start</button>
+        <button class="action-btn" style="background:#6c757d;" onclick="pauseStopwatch()">Pause</button>
+        <button class="action-btn" style="background:#dc3545;" onclick="resetStopwatch()">Reset</button>
+    </div>
+    <div class="seo-description">
+        Track your tasks down to milliseconds with our Stopwatch and Precision Timer utility. Built for productivity tracking, sports practice, workflows, and gaming speed-runs. It offers clean tracking performance directly inside your browser without needing external storage resources.
+    </div>
+</div>
+
     <div class="header-container" style="margin-top: 40px; padding: 20px 0; border-top: 1px solid #ddd;">
     <div class="adsense-banner">Google AdSense Banner (Bottom)</div>
     <p style="font-size: 14px; text-align: center; gap: 15px; display: flex; justify-content: center;">
@@ -217,6 +272,52 @@
             out.style.color = "green";
             out.innerText = "🔍 Tags analyzed successfully! SEO Title and Metadata properties are verified online.";
         }
+        function convertColor() {
+    let color = document.getElementById('colorPicker').value;
+    document.getElementById('hexResult').innerText = color;
+    let r = parseInt(color.substr(1,2), 16);
+    let g = parseInt(color.substr(3,2), 16);
+    let b = parseInt(color.substr(5,2), 16);
+    document.getElementById('rgbResult').innerText = `rgb(${r}, ${g}, ${b})`;
+}
+
+function runConversion() {
+    let val = parseFloat(document.getElementById('unitValue').value) || 0;
+    let from = document.getElementById('unitFrom').value;
+    let to = document.getElementById('unitTo').value;
+    let baseInMeters = val;
+    if(from === 'km') baseInMeters = val * 1000;
+    if(from === 'mi') baseInMeters = val * 1609.34;
+    let finalVal = baseInMeters;
+    if(to === 'km') finalVal = baseInMeters / 1000;
+    if(to === 'mi') finalVal = baseInMeters / 1609.34;
+    document.getElementById('unitResult').innerText = `Result: ${finalVal.toFixed(2)} ${to}`;
+}
+
+let stopwatchInterval;
+let stopwatchTime = 0;
+function startStopwatch() {
+    if(stopwatchInterval) return;
+    stopwatchInterval = setInterval(() => {
+        stopwatchTime += 10;
+        let date = new Date(stopwatchTime);
+        let m = String(date.getUTCMinutes()).padStart(2, '0');
+        let s = String(date.getUTCSeconds()).padStart(2, '0');
+        let ms = String(Math.floor(date.getUTCMilliseconds() / 10)).padStart(2, '0');
+        document.getElementById('stopwatchDisplay').innerText = `00:${m}:${s}.${ms}`;
+    }, 10);
+}
+function pauseStopwatch() {
+    clearInterval(stopwatchInterval);
+    stopwatchInterval = null;
+}
+function resetStopwatch() {
+    pauseStopwatch();
+    stopwatchTime = 0;
+    document.getElementById('stopwatchDisplay').innerText = "00:00:00.00";
+}
+
     </script>
 </body>
 </html>
+
