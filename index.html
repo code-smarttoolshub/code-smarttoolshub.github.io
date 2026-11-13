@@ -204,6 +204,124 @@
         Track your tasks down to milliseconds with our Stopwatch and Precision Timer utility. Built for productivity tracking, sports practice, workflows, and gaming speed-runs. It offers clean tracking performance directly inside your browser without needing external storage resources.
     </div>
 </div>
+<!-- NEW MEDIA & PDF TOOLS SECTION -->
+<div style="max-width: 1100px; margin: 30px auto; padding: 0 20px; display: grid; grid-template-columns: repeat(auto-fit, minmax(310px, 1fr)); gap: 20px;">
+
+    <!-- 1. IMAGE COMPRESSOR -->
+    <div style="background: #ffffff; padding: 25px; border-radius: 12px; box-shadow: 0 4px 12px rgba(0,0,0,0.06); border: 1px solid #e2e8f0;">
+        <h3 style="color: #1e293b; margin-bottom: 10px;">🖼️ Image Compressor</h3>
+        <p style="font-size: 13.5px; color: #64748b; margin-bottom: 12px;">Reduce JPG/PNG file size online without losing visual clarity.</p>
+        <input type="file" id="compInput" accept="image/*" style="width: 100%; margin-bottom: 10px; font-size: 13px;">
+        <label style="font-size: 13px; font-weight: bold;">Quality: <span id="qualVal">70</span>%</label>
+        <input type="range" id="compQuality" min="10" max="95" value="70" oninput="document.getElementById('qualVal').innerText=this.value" style="width: 100%; margin: 8px 0;">
+        <button onclick="compressImage()" style="width: 100%; background: #2563eb; color: white; border: none; padding: 10px; border-radius: 6px; font-weight: bold; cursor: pointer;">Compress & Download</button>
+        <p id="compStatus" style="font-size: 12.5px; color: #10b981; margin-top: 8px; font-weight: bold;"></p>
+    </div>
+
+    <!-- 2. IMAGE RESIZER -->
+    <div style="background: #ffffff; padding: 25px; border-radius: 12px; box-shadow: 0 4px 12px rgba(0,0,0,0.06); border: 1px solid #e2e8f0;">
+        <h3 style="color: #1e293b; margin-bottom: 10px;">📐 Image Resizer</h3>
+        <p style="font-size: 13.5px; color: #64748b; margin-bottom: 12px;">Change image width and height in pixels for social media or web.</p>
+        <input type="file" id="resInput" accept="image/*" style="width: 100%; margin-bottom: 10px; font-size: 13px;">
+        <div style="display: flex; gap: 8px; margin-bottom: 10px;">
+            <input type="number" id="resWidth" placeholder="Width (px)" style="width: 50%; padding: 8px; border: 1px solid #cbd5e1; border-radius: 6px;">
+            <input type="number" id="resHeight" placeholder="Height (px)" style="width: 50%; padding: 8px; border: 1px solid #cbd5e1; border-radius: 6px;">
+        </div>
+        <button onclick="resizeImage()" style="width: 100%; background: #2563eb; color: white; border: none; padding: 10px; border-radius: 6px; font-weight: bold; cursor: pointer;">Resize & Download</button>
+        <p id="resStatus" style="font-size: 12.5px; color: #10b981; margin-top: 8px; font-weight: bold;"></p>
+    </div>
+
+    <!-- 3. PDF OPTIMIZER & COMPRESSOR -->
+    <div style="background: #ffffff; padding: 25px; border-radius: 12px; box-shadow: 0 4px 12px rgba(0,0,0,0.06); border: 1px solid #e2e8f0;">
+        <h3 style="color: #1e293b; margin-bottom: 10px;">📄 PDF Size Reducer</h3>
+        <p style="font-size: 13.5px; color: #64748b; margin-bottom: 12px;">Optimize and repackage PDF documents cleanly inside your browser.</p>
+        <input type="file" id="pdfInput" accept="application/pdf" style="width: 100%; margin-bottom: 12px; font-size: 13px;">
+        <button onclick="compressPDF()" style="width: 100%; background: #2563eb; color: white; border: none; padding: 10px; border-radius: 6px; font-weight: bold; cursor: pointer;">Optimize & Download PDF</button>
+        <p id="pdfStatus" style="font-size: 12.5px; color: #10b981; margin-top: 8px; font-weight: bold;"></p>
+    </div>
+
+</div>
+
+<script src="https://unpkg.com"></script>
+<script>
+    function compressImage() {
+        const file = document.getElementById('compInput').files[0];
+        if (!file) return alert("Please select an image first!");
+        const quality = document.getElementById('compQuality').value / 100;
+        const reader = new FileReader();
+        reader.onload = function(e) {
+            const img = new Image();
+            img.onload = function() {
+                const canvas = document.createElement('canvas');
+                canvas.width = img.width;
+                canvas.height = img.height;
+                canvas.getContext('2d').drawImage(img, 0, 0);
+                canvas.toBlob(function(blob) {
+                    const link = document.createElement('a');
+                    link.href = URL.createObjectURL(blob);
+                    link.download = "compressed_" + file.name.replace(/\.[^/.]+$/, "") + ".jpg";
+                    link.click();
+                    document.getElementById('compStatus').innerText = "Done! New size: " + (blob.size / 1024).toFixed(1) + " KB";
+                }, 'image/jpeg', quality);
+            };
+            img.src = e.target.result;
+        };
+        reader.readAsDataURL(file);
+    }
+
+    function resizeImage() {
+        const file = document.getElementById('resInput').files[0];
+        const w = parseInt(document.getElementById('resWidth').value);
+        const h = parseInt(document.getElementById('resHeight').value);
+        if (!file || !w || !h) return alert("Please select an image and enter both width and height!");
+        const reader = new FileReader();
+        reader.onload = function(e) {
+            const img = new Image();
+            img.onload = function() {
+                const canvas = document.createElement('canvas');
+                canvas.width = w;
+                canvas.height = h;
+                canvas.getContext('2d').drawImage(img, 0, 0, w, h);
+                canvas.toBlob(function(blob) {
+                    const link = document.createElement('a');
+                    link.href = URL.createObjectURL(blob);
+                    link.download = "resized_" + w + "x" + h + ".png";
+                    link.click();
+                    document.getElementById('resStatus').innerText = "Resized to " + w + "x" + h + " px!";
+                }, 'image/png');
+            };
+            img.src = e.target.result;
+        };
+        reader.readAsDataURL(file);
+    }
+
+    async function compressPDF() {
+        const file = document.getElementById('pdfInput').files[0];
+        if (!file) return alert("Please select a PDF file first!");
+        document.getElementById('pdfStatus').innerText = "Optimizing PDF...";
+        const arrayBuffer = await file.arrayBuffer();
+        const pdfDoc = await PDFLib.PDFDocument.load(arrayBuffer);
+        const pdfBytes = await pdfDoc.save({ useObjectStreams: true });
+        const blob = new Blob([pdfBytes], { type: 'application/pdf' });
+        const link = document.createElement('a');
+        link.href = URL.createObjectURL(blob);
+        link.download = "optimized_" + file.name;
+        link.click();
+        document.getElementById('pdfStatus').innerText = "Done! Size: " + (blob.size / 1024).toFixed(1) + " KB";
+    }
+</script>
+<!-- HOW TO USE GUIDE FOR MEDIA & PDF TOOLS -->
+<div style="max-width: 1100px; margin: 20px auto; padding: 25px; background: #ffffff; border-radius: 12px; box-shadow: 0 4px 12px rgba(0,0,0,0.05); border-left: 4px solid #2563eb; line-height: 1.7; color: #334155;">
+    <h3 style="color: #0f172a; margin-bottom: 12px;">📖 How to Use Our Free Image & PDF Optimization Tools</h3>
+    <p style="font-size: 14.5px; margin-bottom: 10px;">
+        Optimizing images and documents is essential for faster website loading, smooth email attachments, and hassle-free online form submissions. Our browser-based utilities process everything directly on your device, ensuring complete privacy without uploading your personal files to any external server.
+    </p>
+    <ul style="font-size: 14px; padding-left: 20px; margin-bottom: 10px;">
+        <li style="margin-bottom: 6px;"><strong>Image Compressor:</strong> Click "Choose File" to select any JPG or PNG photo. Adjust the quality slider between 10% and 95% depending on how much size reduction you need, then click <em>Compress & Download</em> to save your lighter image instantly.</li>
+        <li style="margin-bottom: 6px;"><strong>Image Resizer:</strong> Upload your picture and enter your desired width and height in pixels (for example, 1080x1080 for social media). Click <em>Resize & Download</em> to get an accurately scaled PNG image.</li>
+        <li><strong>PDF Size Reducer:</strong> Select any heavy PDF document from your computer or phone and click <em>Optimize & Download PDF</em>. The tool cleanly repackages internal PDF object streams to reduce file size while keeping your text sharp and readable.</li>
+    </ul>
+</div>
 
     <div class="header-container" style="margin-top: 40px; padding: 20px 0; border-top: 1px solid #ddd;">
     <div class="adsense-banner">Google AdSense Banner (Bottom)</div>
