@@ -64,6 +64,9 @@
                     <button class="tab-btn" onclick="openTool('color-picker')">🎨 Color Picker</button>
         <button class="tab-btn" onclick="openTool('unit-converter')">📏 Unit Converter</button>
         <button class="tab-btn" onclick="openTool('stopwatch')">⏱️ Stopwatch</button>
+<button class="tab-btn" onclick="openTool('emi-calc')">💰 EMI Calc</button>
+<button class="tab-btn" onclick="openTool('bmi-calc')">📊 BMI Calc</button>
+<button class="tab-btn" onclick="openTool('discount-calc')">🧾 Discount Calc</button>
 
         </div>
     </div>
@@ -255,6 +258,36 @@
         <button onclick="compressPDF()" style="width: 100%; background: #2563eb; color: white; border: none; padding: 10px; border-radius: 6px; font-weight: bold; cursor: pointer;">Optimize & Download PDF</button>
         <p id="pdfStatus" style="font-size: 12.5px; color: #10b981; margin-top: 8px; font-weight: bold;"></p>
     </div>
+<!-- 11. EMI & LOAN CALCULATOR -->
+<div id="emi-calc" class="tool-card">
+<h2>💰 Loan &amp; EMI Calculator</h2>
+<input type="number" id="emiAmount" placeholder="Loan Amount (e.g. 50000)" style="width:100%;padding:10px;margin:8px 0;border:1px solid #ccc;border-radius:6px;">
+<input type="number" id="emiRate" placeholder="Annual Interest Rate % (e.g. 8.5)" style="width:100%;padding:10px;margin:8px 0;border:1px solid #ccc;border-radius:6px;">
+<input type="number" id="emiMonths" placeholder="Loan Tenure in Months (e.g. 24)" style="width:100%;padding:10px;margin:8px 0;border:1px solid #ccc;border-radius:6px;">
+<button class="action-btn" onclick="calcEMI()">Calculate Monthly EMI</button>
+<p id="emiResult" style="font-weight:bold;color:#1d4ed8;margin-top:12px;font-size:16px;"></p>
+<p style="font-size:14px;color:#555;margin-top:12px;text-align:left;"><strong>Free Online Loan &amp; EMI Calculator:</strong> Easily calculate your monthly installment, total interest payable, and total loan repayment amount for home loans, car loans, and personal finance planning.</p>
+</div>
+
+<!-- 12. BMI & HEALTH CALCULATOR -->
+<div id="bmi-calc" class="tool-card">
+<h2>📊 BMI &amp; Ideal Weight Calculator</h2>
+<input type="number" id="bmiWeight" placeholder="Weight in kg (e.g. 70)" style="width:100%;padding:10px;margin:8px 0;border:1px solid #ccc;border-radius:6px;">
+<input type="number" id="bmiHeight" placeholder="Height in cm (e.g. 175)" style="width:100%;padding:10px;margin:8px 0;border:1px solid #ccc;border-radius:6px;">
+<button class="action-btn" onclick="calcBMI()">Calculate BMI Score</button>
+<p id="bmiResult" style="font-weight:bold;color:#059669;margin-top:12px;font-size:16px;"></p>
+<p style="font-size:14px;color:#555;margin-top:12px;text-align:left;"><strong>Instant Body Mass Index (BMI) Checker:</strong> Check your healthy weight range and fitness category instantly using the standard WHO Body Mass Index formula for men and women.</p>
+</div>
+
+<!-- 13. PERCENTAGE & DISCOUNT CALCULATOR -->
+<div id="discount-calc" class="tool-card">
+<h2>🧾 Shopping Discount &amp; Percentage Calculator</h2>
+<input type="number" id="origPrice" placeholder="Original Price (e.g. 200)" style="width:100%;padding:10px;margin:8px 0;border:1px solid #ccc;border-radius:6px;">
+<input type="number" id="discPercent" placeholder="Discount % (e.g. 25)" style="width:100%;padding:10px;margin:8px 0;border:1px solid #ccc;border-radius:6px;">
+<button class="action-btn" onclick="calcDiscount()">Calculate Final Price</button>
+<p id="discResult" style="font-weight:bold;color:#dc2626;margin-top:12px;font-size:16px;"></p>
+<p style="font-size:14px;color:#555;margin-top:12px;text-align:left;"><strong>Smart Discount &amp; Savings Calculator:</strong> Quickly find out how much money you save during online sales and calculate the exact final price after applying percentage discounts.</p>
+</div>
 
 </div>
 
