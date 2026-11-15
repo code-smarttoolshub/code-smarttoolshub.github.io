@@ -288,6 +288,11 @@
 <p id="discResult" style="font-weight:bold;color:#dc2626;margin-top:12px;font-size:16px;"></p>
 <p style="font-size:14px;color:#555;margin-top:12px;text-align:left;"><strong>Smart Discount &amp; Savings Calculator:</strong> Quickly find out how much money you save during online sales and calculate the exact final price after applying percentage discounts.</p>
 </div>
+<script>
+function calcEMI(){let p=parseFloat(document.getElementById('emiAmount').value),r=parseFloat(document.getElementById('emiRate').value)/12/100,n=parseFloat(document.getElementById('emiMonths').value);if(!p||!r||!n)return alert('Enter valid loan details');let emi=(p*r*Math.pow(1+r,n))/(Math.pow(1+r,n)-1);document.getElementById('emiResult').innerText='Monthly EMI: '+emi.toFixed(2)+' | Total Payment: '+(emi*n).toFixed(2);}
+function calcBMI(){let w=parseFloat(document.getElementById('bmiWeight').value),h=parseFloat(document.getElementById('bmiHeight').value)/100;if(!w||!h)return alert('Enter weight and height');let bmi=w/(h*h),cat=bmi<18.5?'Underweight':bmi<25?'Normal (Healthy)':bmi<30?'Overweight':'Obese';document.getElementById('bmiResult').innerText='Your BMI: '+bmi.toFixed(1)+' ('+cat+')';}
+function calcDiscount(){let pr=parseFloat(document.getElementById('origPrice').value),d=parseFloat(document.getElementById('discPercent').value);if(!pr||isNaN(d))return alert('Enter price and discount');let save=(pr*d)/100;document.getElementById('discResult').innerText='Final Price: '+(pr-save).toFixed(2)+' | You Save: '+save.toFixed(2);}
+</script>
 
 </div>
 
