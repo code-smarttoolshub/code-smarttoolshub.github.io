@@ -73,6 +73,8 @@
 <button class="tab-btn" onclick="openTool('tip-calc')">🍽️ Tip Split Calc</button>
 <button class="tab-btn" onclick="openTool('margin-calc')">📈 Profit Margin</button>
 <button class="tab-btn" onclick="openTool('fuel-calc')">⛽ Fuel Cost Calc</button>
+ <button class="tab-btn" onclick="openTool('bg-remover')">🪄 BG Remover</button>
+           
 
         </div>
     </div>
@@ -335,6 +337,21 @@
 <p id="fuelResult" style="font-weight:bold;color:#dc2626;margin-top:12px;font-size:16px;"></p>
 <p style="font-size:14px;color:#555;margin-top:12px;text-align:left;"><strong>Road Trip Fuel &amp; Petrol Cost Estimator:</strong> Estimate total liters of fuel needed and total travel petrol cost before planning any road trip or daily commute.</p>
 </div>
+ <!-- 18. PHOTO BACKGROUND REMOVER -->
+<div id="bg-remover" class="tool-card">
+<h2>🪄 Photo Background Remover (Transparent PNG)</h2>
+<p style="font-size:14px;color:#555;margin-bottom:10px;">Upload any photo with a solid white, green, or plain background to make it transparent instantly.</p>
+<input type="file" id="bgInput" accept="image/*" style="width:100%;padding:10px;margin:8px 0;border:1px solid #ccc;border-radius:6px;">
+<label style="font-size:14px;font-weight:bold;display:block;margin-top:8px;">Color Tolerance (Adjust smoothness): <span id="tolVal">35</span></label>
+<input type="range" id="bgTolerance" min="10" max="100" value="35" oninput="document.getElementById('tolVal').innerText=this.value" style="width:100%;margin:6px 0;">
+<button class="action-btn" onclick="removeBG()">Remove Background &amp; Download PNG</button>
+<div style="margin-top:15px;text-align:center;">
+<canvas id="bgCanvas" style="max-width:100%;border:1px dashed #94a3b8;border-radius:8px;display:none;margin:0 auto;"></canvas>
+<br><a id="bgDownload" style="display:none;background:#16a34a;color:#fff;padding:10px 18px;border-radius:8px;text-decoration:none;font-weight:bold;margin-top:10px;">⬇️ Download Transparent PNG</a>
+</div>
+<p style="font-size:14px;color:#555;margin-top:14px;text-align:left;"><strong>Free Online Image Background Remover:</strong> Automatically detect and erase solid backgrounds from product photos, logos, and portraits into high-quality transparent PNG files directly in your browser.</p>
+</div>
+   
 
 <script>
 function calcEMI(){let p=parseFloat(document.getElementById('emiAmount').value),r=parseFloat(document.getElementById('emiRate').value)/12/100,n=parseFloat(document.getElementById('emiMonths').value);if(!p||!r||!n)return alert('Enter valid loan details');let emi=(p*r*Math.pow(1+r,n))/(Math.pow(1+r,n)-1);document.getElementById('emiResult').innerText='Monthly EMI: '+emi.toFixed(2)+' | Total Payment: '+(emi*n).toFixed(2);}
@@ -344,6 +361,7 @@ function calcDiscount(){let pr=parseFloat(document.getElementById('origPrice').v
 function calcTip(){let b=parseFloat(document.getElementById('billTotal').value),t=parseFloat(document.getElementById('tipPercent').value)||0,s=parseInt(document.getElementById('splitPeople').value)||1;if(!b)return alert('Enter bill amount');let tip=(b*t)/100,tot=b+tip;document.getElementById('tipResult').innerText='Total with Tip: '+tot.toFixed(2)+' | Per Person: '+(tot/s).toFixed(2);}
 function calcMargin(){let c=parseFloat(document.getElementById('costPrice').value),s=parseFloat(document.getElementById('sellPrice').value);if(!c||!s)return alert('Enter cost and selling price');let prof=s-c,marg=(prof/s)*100;document.getElementById('marginResult').innerText='Net Profit: '+prof.toFixed(2)+' | Margin: '+marg.toFixed(1)+'%';}
 function calcFuel(){let d=parseFloat(document.getElementById('tripDist').value),e=parseFloat(document.getElementById('fuelEff').value),p=parseFloat(document.getElementById('fuelPrice').value);if(!d||!e||!p)return alert('Enter valid trip details');let lit=d/e;document.getElementById('fuelResult').innerText='Fuel Needed: '+lit.toFixed(1)+' Liters | Total Cost: '+(lit*p).toFixed(2);}
+function removeBG(){let f=document.getElementById('bgInput').files[0];if(!f)return alert('Please upload an image first!');let tol=parseInt(document.getElementById('bgTolerance').value),r=new FileReader();r.onload=function(e){let img=new Image();img.onload=function(){let c=document.getElementById('bgCanvas'),ctx=c.getContext('2d');c.width=img.width;c.height=img.height;ctx.drawImage(img,0,0);let d=ctx.getImageData(0,0,c.width,c.height),p=d.data,r0=p[0],g0=p[1],b0=p[2];for(let i=0;i<p.length;i+=4){if(Math.abs(p[i]-r0)<tol&&Math.abs(p[i+1]-g0)<tol&&Math.abs(p[i+2]-b0)<tol){p[i+3]=0;}}ctx.putImageData(d,0,0);c.style.display='block';let dl=document.getElementById('bgDownload');dl.href=c.toDataURL('image/png');dl.download='transparent-bg.png';dl.style.display='inline-block';};img.src=e.target.result;};r.readAsDataURL(f);}
 
 </script>
 
