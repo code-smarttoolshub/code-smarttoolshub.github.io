@@ -71,6 +71,10 @@
 <button class="tab-btn" onclick="openTool('margin-calc')">📈 Profit Margin</button>
 <button class="tab-btn" onclick="openTool('fuel-calc')">⛽ Fuel Cost Calc</button>
  <button class="tab-btn" onclick="openTool('bg-remover')">🪄 BG Remover</button>
+  <button class="tab-btn" onclick="document.getElementById('compInput').scrollIntoView({behavior:'smooth'})">🖼️ Image Compress</button>
+<button class="tab-btn" onclick="document.getElementById('resInput').scrollIntoView({behavior:'smooth'})">📐 Image Resizer</button>
+<button class="tab-btn" onclick="document.getElementById('pdfInput').scrollIntoView({behavior:'smooth'})">📄 PDF Reducer</button>
+          
            
 
         </div>
@@ -240,6 +244,8 @@
         <input type="range" id="compQuality" min="10" max="95" value="70" oninput="document.getElementById('qualVal').innerText=this.value" style="width: 100%; margin: 8px 0;">
         <button onclick="compressImage()" style="width: 100%; background: #2563eb; color: white; border: none; padding: 10px; border-radius: 6px; font-weight: bold; cursor: pointer;">Compress & Download</button>
         <p id="compStatus" style="font-size: 12.5px; color: #10b981; margin-top: 8px; font-weight: bold;"></p>
+        <p style="font-size:14px;color:#555;margin-top:12px;text-align:left;"><strong>Free Online JPG &amp; PNG Image Compressor:</strong> Reduce photo file size by up to 80% without losing visual sharpness. Perfect for faster website loading, email attachments, and social media uploads directly inside your browser.</p>
+
     </div>
 
     <!-- 2. IMAGE RESIZER -->
@@ -253,6 +259,8 @@
         </div>
         <button onclick="resizeImage()" style="width: 100%; background: #2563eb; color: white; border: none; padding: 10px; border-radius: 6px; font-weight: bold; cursor: pointer;">Resize & Download</button>
         <p id="resStatus" style="font-size: 12.5px; color: #10b981; margin-top: 8px; font-weight: bold;"></p>
+        <p style="font-size:14px;color:#555;margin-top:12px;text-align:left;"><strong>Instant Online Photo &amp; Pixel Resizer:</strong> Resize JPG, PNG, and WebP images to exact pixel dimensions for Instagram, YouTube thumbnails, passport photos, and web banners in seconds with zero quality loss.</p>
+
     </div>
 
     <!-- 3. PDF OPTIMIZER & COMPRESSOR -->
@@ -262,6 +270,8 @@
         <input type="file" id="pdfInput" accept="application/pdf" style="width: 100%; margin-bottom: 12px; font-size: 13px;">
         <button onclick="compressPDF()" style="width: 100%; background: #2563eb; color: white; border: none; padding: 10px; border-radius: 6px; font-weight: bold; cursor: pointer;">Optimize & Download PDF</button>
         <p id="pdfStatus" style="font-size: 12.5px; color: #10b981; margin-top: 8px; font-weight: bold;"></p>
+        <p style="font-size:14px;color:#555;margin-top:12px;text-align:left;"><strong>Fast Browser-Based PDF Compressor &amp; Optimizer:</strong> Shrink large PDF documents and scanned files quickly for online job portals, university applications, and email sharing without uploading files to any server.</p>
+
     </div>
 <!-- 11. EMI & LOAN CALCULATOR -->
 <div id="emi-calc" class="tool-card">
@@ -589,6 +599,7 @@ function resetStopwatch() {
     stopwatchTime = 0;
     document.getElementById('stopwatchDisplay').innerText = "00:00:00.00";
 }
+function openTool(id){let el=document.getElementById(id);if(el)el.scrollIntoView({behavior:'smooth',block:'center'});}
 
     </script>
 </body>
