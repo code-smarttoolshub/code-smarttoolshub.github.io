@@ -69,6 +69,10 @@
 <button class="tab-btn" onclick="openTool('emi-calc')">💰 EMI Calc</button>
 <button class="tab-btn" onclick="openTool('bmi-calc')">📊 BMI Calc</button>
 <button class="tab-btn" onclick="openTool('discount-calc')">🧾 Discount Calc</button>
+<button class="tab-btn" onclick="openTool('vat-calc')">🧾 GST / VAT Calc</button>
+<button class="tab-btn" onclick="openTool('tip-calc')">🍽️ Tip Split Calc</button>
+<button class="tab-btn" onclick="openTool('margin-calc')">📈 Profit Margin</button>
+<button class="tab-btn" onclick="openTool('fuel-calc')">⛽ Fuel Cost Calc</button>
 
         </div>
     </div>
@@ -290,10 +294,57 @@
 <p id="discResult" style="font-weight:bold;color:#dc2626;margin-top:12px;font-size:16px;"></p>
 <p style="font-size:14px;color:#555;margin-top:12px;text-align:left;"><strong>Smart Discount &amp; Savings Calculator:</strong> Quickly find out how much money you save during online sales and calculate the exact final price after applying percentage discounts.</p>
 </div>
+    <!-- 14. GST / VAT TAX CALCULATOR -->
+<div id="vat-calc" class="tool-card">
+<h2>🧾 GST &amp; VAT Sales Tax Calculator</h2>
+<input type="number" id="vatPrice" placeholder="Net Price Amount (e.g. 1000)" style="width:100%;padding:10px;margin:8px 0;border:1px solid #ccc;border-radius:6px;">
+<input type="number" id="vatRate" placeholder="Tax / VAT Rate % (e.g. 18)" style="width:100%;padding:10px;margin:8px 0;border:1px solid #ccc;border-radius:6px;">
+<button class="action-btn" onclick="calcVAT()">Calculate Total with Tax</button>
+<p id="vatResult" style="font-weight:bold;color:#1d4ed8;margin-top:12px;font-size:16px;"></p>
+<p style="font-size:14px;color:#555;margin-top:12px;text-align:left;"><strong>Instant GST &amp; VAT Tax Calculator:</strong> Calculate inclusive and exclusive sales tax, VAT, or GST amounts accurately for invoices, e-commerce pricing, and business billing.</p>
+</div>
+
+<!-- 15. RESTAURANT TIP & BILL SPLIT CALCULATOR -->
+<div id="tip-calc" class="tool-card">
+<h2>🍽️ Restaurant Tip &amp; Bill Split Calculator</h2>
+<input type="number" id="billTotal" placeholder="Total Bill Amount (e.g. 120)" style="width:100%;padding:10px;margin:8px 0;border:1px solid #ccc;border-radius:6px;">
+<input type="number" id="tipPercent" placeholder="Tip Percentage % (e.g. 15)" style="width:100%;padding:10px;margin:8px 0;border:1px solid #ccc;border-radius:6px;">
+<input type="number" id="splitPeople" placeholder="Number of People (e.g. 4)" style="width:100%;padding:10px;margin:8px 0;border:1px solid #ccc;border-radius:6px;">
+<button class="action-btn" onclick="calcTip()">Split Bill &amp; Tip</button>
+<p id="tipResult" style="font-weight:bold;color:#059669;margin-top:12px;font-size:16px;"></p>
+<p style="font-size:14px;color:#555;margin-top:12px;text-align:left;"><strong>Easy Restaurant Tip &amp; Bill Splitter:</strong> Quickly calculate restaurant tips and divide the total bill evenly among friends, family, or coworkers.</p>
+</div>
+
+<!-- 16. BUSINESS PROFIT MARGIN CALCULATOR -->
+<div id="margin-calc" class="tool-card">
+<h2>📈 Business Profit Margin Calculator</h2>
+<input type="number" id="costPrice" placeholder="Cost Price (e.g. 60)" style="width:100%;padding:10px;margin:8px 0;border:1px solid #ccc;border-radius:6px;">
+<input type="number" id="sellPrice" placeholder="Selling Price (e.g. 100)" style="width:100%;padding:10px;margin:8px 0;border:1px solid #ccc;border-radius:6px;">
+<button class="action-btn" onclick="calcMargin()">Calculate Profit &amp; Margin</button>
+<p id="marginResult" style="font-weight:bold;color:#7c3aed;margin-top:12px;font-size:16px;"></p>
+<p style="font-size:14px;color:#555;margin-top:12px;text-align:left;"><strong>E-Commerce Profit Margin Calculator:</strong> Find your exact net profit, gross profit margin percentage, and markup for Amazon, Shopify, and retail products.</p>
+</div>
+
+<!-- 17. TRIP FUEL COST CALCULATOR -->
+<div id="fuel-calc" class="tool-card">
+<h2>⛽ Trip Fuel &amp; Gas Cost Calculator</h2>
+<input type="number" id="tripDist" placeholder="Trip Distance in km (e.g. 300)" style="width:100%;padding:10px;margin:8px 0;border:1px solid #ccc;border-radius:6px;">
+<input type="number" id="fuelEff" placeholder="Car Mileage km/liter (e.g. 15)" style="width:100%;padding:10px;margin:8px 0;border:1px solid #ccc;border-radius:6px;">
+<input type="number" id="fuelPrice" placeholder="Fuel Price per Liter (e.g. 1.5)" style="width:100%;padding:10px;margin:8px 0;border:1px solid #ccc;border-radius:6px;">
+<button class="action-btn" onclick="calcFuel()">Calculate Trip Fuel Cost</button>
+<p id="fuelResult" style="font-weight:bold;color:#dc2626;margin-top:12px;font-size:16px;"></p>
+<p style="font-size:14px;color:#555;margin-top:12px;text-align:left;"><strong>Road Trip Fuel &amp; Petrol Cost Estimator:</strong> Estimate total liters of fuel needed and total travel petrol cost before planning any road trip or daily commute.</p>
+</div>
+
 <script>
 function calcEMI(){let p=parseFloat(document.getElementById('emiAmount').value),r=parseFloat(document.getElementById('emiRate').value)/12/100,n=parseFloat(document.getElementById('emiMonths').value);if(!p||!r||!n)return alert('Enter valid loan details');let emi=(p*r*Math.pow(1+r,n))/(Math.pow(1+r,n)-1);document.getElementById('emiResult').innerText='Monthly EMI: '+emi.toFixed(2)+' | Total Payment: '+(emi*n).toFixed(2);}
 function calcBMI(){let w=parseFloat(document.getElementById('bmiWeight').value),h=parseFloat(document.getElementById('bmiHeight').value)/100;if(!w||!h)return alert('Enter weight and height');let bmi=w/(h*h),cat=bmi<18.5?'Underweight':bmi<25?'Normal (Healthy)':bmi<30?'Overweight':'Obese';document.getElementById('bmiResult').innerText='Your BMI: '+bmi.toFixed(1)+' ('+cat+')';}
 function calcDiscount(){let pr=parseFloat(document.getElementById('origPrice').value),d=parseFloat(document.getElementById('discPercent').value);if(!pr||isNaN(d))return alert('Enter price and discount');let save=(pr*d)/100;document.getElementById('discResult').innerText='Final Price: '+(pr-save).toFixed(2)+' | You Save: '+save.toFixed(2);}
+    function calcVAT(){let p=parseFloat(document.getElementById('vatPrice').value),r=parseFloat(document.getElementById('vatRate').value);if(!p||isNaN(r))return alert('Enter price and tax rate');let tax=(p*r)/100;document.getElementById('vatResult').innerText='Tax Amount: '+tax.toFixed(2)+' | Total Price: '+(p+tax).toFixed(2);}
+function calcTip(){let b=parseFloat(document.getElementById('billTotal').value),t=parseFloat(document.getElementById('tipPercent').value)||0,s=parseInt(document.getElementById('splitPeople').value)||1;if(!b)return alert('Enter bill amount');let tip=(b*t)/100,tot=b+tip;document.getElementById('tipResult').innerText='Total with Tip: '+tot.toFixed(2)+' | Per Person: '+(tot/s).toFixed(2);}
+function calcMargin(){let c=parseFloat(document.getElementById('costPrice').value),s=parseFloat(document.getElementById('sellPrice').value);if(!c||!s)return alert('Enter cost and selling price');let prof=s-c,marg=(prof/s)*100;document.getElementById('marginResult').innerText='Net Profit: '+prof.toFixed(2)+' | Margin: '+marg.toFixed(1)+'%';}
+function calcFuel(){let d=parseFloat(document.getElementById('tripDist').value),e=parseFloat(document.getElementById('fuelEff').value),p=parseFloat(document.getElementById('fuelPrice').value);if(!d||!e||!p)return alert('Enter valid trip details');let lit=d/e;document.getElementById('fuelResult').innerText='Fuel Needed: '+lit.toFixed(1)+' Liters | Total Cost: '+(lit*p).toFixed(2);}
+
 </script>
 
 </div>
