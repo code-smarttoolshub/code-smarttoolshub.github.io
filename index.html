@@ -74,6 +74,10 @@
   <button class="tab-btn" onclick="document.getElementById('compInput').scrollIntoView({behavior:'smooth'})">🖼️ Image Compress</button>
 <button class="tab-btn" onclick="document.getElementById('resInput').scrollIntoView({behavior:'smooth'})">📐 Image Resizer</button>
 <button class="tab-btn" onclick="document.getElementById('pdfInput').scrollIntoView({behavior:'smooth'})">📄 PDF Reducer</button>
+<button class="tab-btn" onclick="openTool('gpa-calc')">🎓 GPA &amp; % Calc</button>
+<button class="tab-btn" onclick="openTool('pin-gen')">🎲 PIN &amp; Random</button>
+<button class="tab-btn" onclick="openTool('text-rep')">🔤 Text Repeater</button>
+<button class="tab-btn" onclick="openTool('pomo-timer')">⏱️ Pomodoro Timer</button>
           
            
 
@@ -358,6 +362,50 @@
 </div>
 <p style="font-size:14px;color:#555;margin-top:14px;text-align:left;"><strong>Free Online Image Background Remover:</strong> Automatically detect and erase solid backgrounds from product photos, logos, and portraits into high-quality transparent PNG files directly in your browser.</p>
 </div>
+<!-- 19. GPA & PERCENTAGE CALCULATOR -->
+<div id="gpa-calc" class="tool-card">
+<h2>🎓 GPA &amp; Percentage Calculator</h2>
+<input type="number" id="obtMarks" placeholder="Obtained Marks (e.g. 425)">
+<input type="number" id="totMarks" placeholder="Total Marks (e.g. 500)">
+<button class="action-btn" onclick="calcGPA()">Calculate Percentage &amp; GPA</button>
+<p id="gpaResult" style="font-weight:bold;color:#16a34a;margin-top:10px;text-align:center;"></p>
+<p style="font-size:14px;color:#555;margin-top:12px;text-align:left;"><strong>Instant Student Marks to GPA Converter:</strong> Quickly convert exam scores into exact percentage, 4.0 scale GPA, and letter grades for school, college, and university applications.</p>
+</div>
+
+<!-- 20. RANDOM NUMBER & SECURE PIN GENERATOR -->
+<div id="pin-gen" class="tool-card">
+<h2>🎲 Random Number &amp; PIN Generator</h2>
+<input type="number" id="minNum" placeholder="Minimum Number (e.g. 1000)" value="1000">
+<input type="number" id="maxNum" placeholder="Maximum Number (e.g. 9999)" value="9999">
+<button class="action-btn" onclick="genPIN()">Generate Random Number / PIN</button>
+<p id="pinResult" style="font-weight:bold;color:#007BFF;font-size:18px;margin-top:10px;text-align:center;"></p>
+<p style="font-size:14px;color:#555;margin-top:12px;text-align:left;"><strong>Free Lucky Draw &amp; Secure PIN Code Generator:</strong> Generate instant random numbers for giveaways, classroom games, and 4-digit or 6-digit security PINs in one click.</p>
+</div>
+
+<!-- 21. TEXT REPEATER & REVERSE TEXT TOOL -->
+<div id="text-rep" class="tool-card">
+<h2>🔤 Text Repeater &amp; Reverse Tool</h2>
+<input type="text" id="repText" placeholder="Enter word or message to repeat...">
+<input type="number" id="repCount" placeholder="How many times? (e.g. 10)" value="5">
+<div style="display:flex;gap:8px;">
+<button class="action-btn" onclick="repeatTxt()">Repeat Text</button>
+<button class="action-btn" style="background:#007BFF;" onclick="reverseTxt()">Reverse Text</button>
+</div>
+<textarea id="repOutput" rows="3" readonly placeholder="Result appears here..." style="margin-top:8px;"></textarea>
+<p style="font-size:14px;color:#555;margin-top:10px;text-align:left;"><strong>Online Text Multiplier &amp; Mirror Text Generator:</strong> Repeat any message up to 500 times or flip text backward for social media captions, WhatsApp chats, and testing.</p>
+</div>
+
+<!-- 22. POMODORO 25-MIN STUDY & FOCUS TIMER -->
+<div id="pomo-timer" class="tool-card">
+<h2>⏱️ Pomodoro 25-Min Study Timer</h2>
+<p id="pomoDisplay" style="font-size:32px;font-weight:bold;color:#dc2626;text-align:center;margin:12px 0;">25:00</p>
+<div style="display:flex;gap:8px;">
+<button class="action-btn" onclick="startPomo()">Start 25m</button>
+<button class="action-btn" style="background:#dc2626;" onclick="resetPomo()">Reset</button>
+</div>
+<p style="font-size:14px;color:#555;margin-top:12px;text-align:left;"><strong>Productivity &amp; Exam Focus Timer:</strong> Boost concentration using the proven 25-minute Pomodoro study method for deep work, exam preparation, and coding sessions.</p>
+</div>
+    
  </div>  
 
 <script>
@@ -600,6 +648,11 @@ function resetStopwatch() {
     document.getElementById('stopwatchDisplay').innerText = "00:00:00.00";
 }
 function openTool(id){let el=document.getElementById(id);if(el)el.scrollIntoView({behavior:'smooth',block:'center'});}
+function calcGPA(){let o=parseFloat(document.getElementById('obtMarks').value),t=parseFloat(document.getElementById('totMarks').value);if(!o||!t||t<=0)return alert('Enter valid marks');let pct=(o/t)*100,gpa=(pct/25).toFixed(2),g=pct>=85?'A+':pct>=75?'A':pct>=65?'B':pct>=50?'C':'F';document.getElementById('gpaResult').innerText='Percentage: '+pct.toFixed(1)+'% | GPA: '+gpa+'/4.0 | Grade: '+g;}
+function genPIN(){let min=parseInt(document.getElementById('minNum').value)||1,max=parseInt(document.getElementById('maxNum').value)||9999;let r=Math.floor(Math.random()*(max-min+1))+min;document.getElementById('pinResult').innerText='Generated: '+r;}
+function repeatTxt(){let s=document.getElementById('repText').value,c=Math.min(parseInt(document.getElementById('repCount').value)||1,500);if(!s)return alert('Enter some text');document.getElementById('repOutput').value=Array(c).fill(s).join(' ');}
+function reverseTxt(){let s=document.getElementById('repText').value;if(!s)return alert('Enter some text');document.getElementById('repOutput').value=s.split('').reverse().join('');}
+let pomoInt,pomoSec=1500;function startPomo(){clearInterval(pomoInt);pomoInt=setInterval(()=>{if(pomoSec<=0){clearInterval(pomoInt);alert('25 Minutes Complete! Take a 5-min break.');return;}pomoSec--;let m=String(Math.floor(pomoSec/60)).padStart(2,'0'),s=String(pomoSec%60).padStart(2,'0');document.getElementById('pomoDisplay').innerText=m+':'+s;},1000);}function resetPomo(){clearInterval(pomoInt);pomoSec=1500;document.getElementById('pomoDisplay').innerText='25:00';}
 
     </script>
 </body>
