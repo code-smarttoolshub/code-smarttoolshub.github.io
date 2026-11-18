@@ -78,6 +78,12 @@
 <button class="tab-btn" onclick="openTool('pin-gen')">🎲 PIN &amp; Random</button>
 <button class="tab-btn" onclick="openTool('text-rep')">🔤 Text Repeater</button>
 <button class="tab-btn" onclick="openTool('pomo-timer')">⏱️ Pomodoro Timer</button>
+<button class="tab-btn" onclick="openTool('unit-conv')">⚖️ Unit Converter</button>
+<button class="tab-btn" onclick="openTool('sale-calc')">🧾 Sale Discount</button>
+<button class="tab-btn" onclick="openTool('date-diff')">📅 Days Counter</button>
+<button class="tab-btn" onclick="openTool('pass-check')">🔐 Password Check</button>
+<button class="tab-btn" onclick="openTool('tts-reader')">🗣️ Voice Reader</button>
+            
           
            
 
@@ -404,6 +410,63 @@
 <button class="action-btn" style="background:#dc2626;" onclick="resetPomo()">Reset</button>
 </div>
 <p style="font-size:14px;color:#555;margin-top:12px;text-align:left;"><strong>Productivity &amp; Exam Focus Timer:</strong> Boost concentration using the proven 25-minute Pomodoro study method for deep work, exam preparation, and coding sessions.</p>
+</div>
+<!-- 23. UNIT CONVERTER (LENGTH, WEIGHT & TEMP) -->
+<div id="unit-conv" class="tool-card">
+<h2>⚖️ Unit Converter (Length, Weight &amp; Temp)</h2>
+<input type="number" id="unitVal" placeholder="Enter value (e.g. 10)">
+<select id="unitType" style="width:100%;padding:10px;margin:6px 0;border:1px solid #ccc;border-radius:8px;">
+<option value="km-mi">Kilometers (km) → Miles (mi)</option>
+<option value="mi-km">Miles (mi) → Kilometers (km)</option>
+<option value="kg-lb">Kilograms (kg) → Pounds (lbs)</option>
+<option value="lb-kg">Pounds (lbs) → Kilograms (kg)</option>
+<option value="c-f">Celsius (°C) → Fahrenheit (°F)</option>
+<option value="f-c">Fahrenheit (°F) → Celsius (°C)</option>
+</select>
+<button class="action-btn" onclick="convUnit()">Convert Unit</button>
+<p id="unitResult" style="font-weight:bold;color:#16a34a;margin-top:10px;text-align:center;"></p>
+<p style="font-size:14px;color:#555;margin-top:12px;text-align:left;"><strong>Instant Measurement &amp; Temperature Converter:</strong> Convert kilometers to miles, kilograms to pounds, and Celsius to Fahrenheit accurately for school, travel, and fitness.</p>
+</div>
+
+<!-- 24. SALE DISCOUNT & SAVINGS CALCULATOR -->
+<div id="sale-calc" class="tool-card">
+<h2>🧾 Sale Discount &amp; Savings Calculator</h2>
+<input type="number" id="saleOrig" placeholder="Original Price (e.g. 120)">
+<input type="number" id="salePct" placeholder="Discount % OFF (e.g. 25)">
+<button class="action-btn" onclick="calcSale()">Calculate Final Price</button>
+<p id="saleResult" style="font-weight:bold;color:#db2777;margin-top:10px;text-align:center;"></p>
+<p style="font-size:14px;color:#555;margin-top:12px;text-align:left;"><strong>Smart Shopping Discount Finder:</strong> Instantly calculate how much money you save and the final checkout price during Black Friday, Eid, and seasonal sales.</p>
+</div>
+
+<!-- 25. DAYS BETWEEN TWO DATES CALCULATOR -->
+<div id="date-diff" class="tool-card">
+<h2>📅 Days Between Two Dates Calculator</h2>
+<label style="font-size:13px;color:#555;">Start Date:</label>
+<input type="date" id="startDate">
+<label style="font-size:13px;color:#555;">End Date:</label>
+<input type="date" id="endDate">
+<button class="action-btn" onclick="calcDays()">Calculate Total Days</button>
+<p id="daysResult" style="font-weight:bold;color:#007BFF;margin-top:10px;text-align:center;"></p>
+<p style="font-size:14px;color:#555;margin-top:12px;text-align:left;"><strong>Date Duration &amp; Countdown Counter:</strong> Find the exact number of days and weeks between any two calendar dates for exams, trips, and project deadlines.</p>
+</div>
+
+<!-- 26. PASSWORD STRENGTH & SECURITY CHECKER -->
+<div id="pass-check" class="tool-card">
+<h2>🔐 Password Strength &amp; Security Checker</h2>
+<input type="text" id="checkPassInput" placeholder="Type a password to test strength..." oninput="checkPassStrength()">
+<p id="passStrengthResult" style="font-weight:bold;margin-top:10px;text-align:center;">Enter a password above to test</p>
+<p style="font-size:14px;color:#555;margin-top:12px;text-align:left;"><strong>100% Private Local Password Tester:</strong> Check if your password is Weak, Medium, or Strong against brute-force attacks—runs locally in your browser with zero data saved.</p>
+</div>
+
+<!-- 27. TEXT-TO-SPEECH VOICE READER -->
+<div id="tts-reader" class="tool-card">
+<h2>🗣️ Text-to-Speech Voice Reader</h2>
+<textarea id="ttsText" rows="3" placeholder="Paste English text or study notes here to listen..."></textarea>
+<div style="display:flex;gap:8px;margin-top:6px;">
+<button class="action-btn" onclick="speakText()">🔊 Listen Now</button>
+<button class="action-btn" style="background:#dc2626;" onclick="stopSpeech()">⏹️ Stop</button>
+</div>
+<p style="font-size:14px;color:#555;margin-top:12px;text-align:left;"><strong>Free Online Audio Reader &amp; Pronunciation Helper:</strong> Listen to any English paragraph, essay, or article read aloud clearly to improve pronunciation and hands-free studying.</p>
 </div>
     
  </div>  
