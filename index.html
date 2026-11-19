@@ -84,6 +84,11 @@
 <button class="tab-btn" onclick="openTool('date-diff')">📅 Days Counter</button>
 <button class="tab-btn" onclick="openTool('pass-check')">🔐 Password Check</button>
 <button class="tab-btn" onclick="openTool('tts-reader')">🗣️ Voice Reader</button>
+<button class="tab-btn" onclick="openTool('comp-int')">📈 Compound Interest</button>
+<button class="tab-btn" onclick="openTool('typing-test')">⚡ Typing Speed Test</button>
+<button class="tab-btn" onclick="openTool('num-words')">🧾 Number to Words</button>
+<button class="tab-btn" onclick="openTool('roman-conv')">📏 Roman Numerals</button>
+<button class="tab-btn" onclick="openTool('base64-tool')">📝 Base64 Encoder</button>
             
           
            
@@ -469,6 +474,57 @@
 </div>
 <p style="font-size:14px;color:#555;margin-top:12px;text-align:left;"><strong>Free Online Audio Reader &amp; Pronunciation Helper:</strong> Listen to any English paragraph, essay, or article read aloud clearly to improve pronunciation and hands-free studying.</p>
 </div>
+<!-- 28. COMPOUND INTEREST & SAVINGS CALCULATOR -->
+<div id="comp-int" class="tool-card">
+<h2>📈 Compound Interest &amp; Savings Calculator</h2>
+<input type="number" id="ciPrincipal" placeholder="Initial Amount ($ e.g. 1000)">
+<input type="number" id="ciRate" placeholder="Annual Interest Rate (% e.g. 8)">
+<input type="number" id="ciYears" placeholder="Time Period (Years e.g. 5)">
+<button class="action-btn" onclick="calcCompound()">Calculate Future Value</button>
+<p id="ciResult" style="font-weight:bold;color:#16a34a;margin-top:10px;text-align:center;"></p>
+<p style="font-size:14px;color:#555;margin-top:12px;text-align:left;"><strong>Wealth &amp; Investment Growth Calculator:</strong> Calculate how your savings grow over time with annual compound interest for financial planning and student finance projects.</p>
+</div>
+
+<!-- 29. TYPING SPEED (WPM) TEST -->
+<div id="typing-test" class="tool-card">
+<h2>⚡ Typing Speed (WPM) Test</h2>
+<p id="typingPrompt" style="background:#f1f5f9;padding:10px;border-radius:8px;font-size:14px;color:#1e293b;">The quick brown fox jumps over the lazy dog while practicing fast and accurate keyboard typing skills every single day.</p>
+<textarea id="typingInput" rows="2" placeholder="Start typing the sentence above here..." oninput="trackTyping()"></textarea>
+<p id="typingResult" style="font-weight:bold;color:#2563eb;margin-top:10px;text-align:center;">Start typing above to measure your WPM speed!</p>
+<button class="action-btn" style="background:#475569;" onclick="resetTyping()">🔄 Reset Test</button>
+<p style="font-size:14px;color:#555;margin-top:12px;text-align:left;"><strong>Online Words-Per-Minute (WPM) Checker:</strong> Test and improve your keyboard typing speed and accuracy right inside your browser.</p>
+</div>
+
+<!-- 30. NUMBER TO ENGLISH WORDS CONVERTER -->
+<div id="num-words" class="tool-card">
+<h2>🧾 Number to English Words Converter</h2>
+<input type="number" id="numWordInput" placeholder="Enter a number (e.g. 2450)">
+<button class="action-btn" onclick="convertNumWords()">Convert to Words</button>
+<p id="numWordResult" style="font-weight:bold;color:#16a34a;margin-top:10px;text-align:center;"></p>
+<p style="font-size:14px;color:#555;margin-top:12px;text-align:left;"><strong>Check &amp; Invoice Amount Spelling Tool:</strong> Instantly convert any numeric figure into properly spelled English words for bank checks, invoices, and legal documents.</p>
+</div>
+
+<!-- 31. ROMAN NUMERAL CONVERTER -->
+<div id="roman-conv" class="tool-card">
+<h2>📏 Roman Numeral Converter</h2>
+<input type="number" id="romanInput" placeholder="Enter a number (1 to 3999, e.g. 2026)">
+<button class="action-btn" onclick="toRoman()">Convert to Roman</button>
+<p id="romanResult" style="font-weight:bold;color:#7c3aed;margin-top:10px;text-align:center;"></p>
+<p style="font-size:14px;color:#555;margin-top:12px;text-align:left;"><strong>Instant Roman Numeral Translator:</strong> Convert standard numbers into classic Roman numerals (I, V, X, L, C, D, M) for school assignments, dates, and outlines.</p>
+</div>
+
+<!-- 32. BASE64 TEXT ENCODER & DECODER -->
+<div id="base64-tool" class="tool-card">
+<h2>📝 Base64 Text Encoder &amp; Decoder</h2>
+<textarea id="b64Input" rows="2" placeholder="Enter plain text or Base64 string..."></textarea>
+<div style="display:flex;gap:8px;margin-top:6px;">
+<button class="action-btn" onclick="encodeB64()">🔒 Encode Base64</button>
+<button class="action-btn" style="background:#0d9488;" onclick="decodeB64()">🔓 Decode Base64</button>
+</div>
+<p id="b64Result" style="font-weight:bold;color:#0f172a;margin-top:10px;word-break:break-all;text-align:center;"></p>
+<p style="font-size:14px;color:#555;margin-top:12px;text-align:left;"><strong>Developer &amp; Student Base64 Utility:</strong> Safely encode plain text into Base64 format or decode Base64 strings instantly in your browser.</p>
+</div>
+    
     
  </div>  
 
@@ -558,6 +614,12 @@ function calcSale(){let p=parseFloat(document.getElementById('saleOrig').value),
 function calcDays(){let d1=new Date(document.getElementById('startDate').value),d2=new Date(document.getElementById('endDate').value);if(isNaN(d1)||isNaN(d2))return alert('Select both dates');let diff=Math.round(Math.abs((d2-d1)/(1000*60*60*24)));document.getElementById('daysResult').innerText='Total Difference: '+diff+' Days ('+(diff/7).toFixed(1)+' Weeks)';}
 function checkPassStrength(){let s=document.getElementById('checkPassInput').value,el=document.getElementById('passStrengthResult');if(!s){el.innerText='Enter a password above to test';el.style.color='#333';return;}let score=0;if(s.length>=8)score++;if(s.length>=12)score++;if(/[A-Z]/.test(s))score++;if(/[0-9]/.test(s))score++;if(/[^A-Za-z0-9]/.test(s))score++;if(score<=2){el.innerText='Strength: WEAK ❌ (Add uppercase, numbers & symbols)';el.style.color='#dc2626';}else if(score<=4){el.innerText='Strength: MEDIUM ⚠️ (Make it 12+ characters for max safety)';el.style.color='#d97706';}else{el.innerText='Strength: VERY STRONG ✅ (Excellent security!)';el.style.color='#16a34a';}}
 function speakText(){let t=document.getElementById('ttsText').value;if(!t)return alert('Enter text to listen');window.speechSynthesis.cancel();let u=new SpeechSynthesisUtterance(t);u.lang='en-US';window.speechSynthesis.speak(u);}function stopSpeech(){window.speechSynthesis.cancel();}
+    function calcCompound(){let p=parseFloat(document.getElementById('ciPrincipal').value),r=parseFloat(document.getElementById('ciRate').value)/100,t=parseFloat(document.getElementById('ciYears').value);if(!p||isNaN(r)||!t)return alert('Enter valid amount, rate, and years');let amt=p*Math.pow((1+r),t),gain=amt-p;document.getElementById('ciResult').innerText='Future Value: $'+amt.toFixed(2)+' (Total Profit: $'+gain.toFixed(2)+')';}
+let typeStartTime=null;function trackTyping(){let val=document.getElementById('typingInput').value;if(!typeStartTime&&val.length>0)typeStartTime=new Date();if(val.length>0){let mins=(new Date()-typeStartTime)/60000;let words=val.trim().split(/\s+/).length;let wpm=mins>0?Math.round(words/mins):0;document.getElementById('typingResult').innerText='Live Speed: '+wpm+' WPM ('+val.length+' characters typed)';}}function resetTyping(){typeStartTime=null;document.getElementById('typingInput').value='';document.getElementById('typingResult').innerText='Start typing above to measure your WPM speed!';}
+function convertNumWords(){let n=parseInt(document.getElementById('numWordInput').value);if(isNaN(n)||n<0||n>999999999)return alert('Enter a number between 0 and 999,999,999');if(n===0){document.getElementById('numWordResult').innerText='Zero';return;}const a=['','One','Two','Three','Four','Five','Six','Seven','Eight','Nine','Ten','Eleven','Twelve','Thirteen','Fourteen','Fifteen','Sixteen','Seventeen','Eighteen','Nineteen'];const b=['','','Twenty','Thirty','Forty','Fifty','Sixty','Seventy','Eighty','Ninety'];function inWords(num){if(num<20)return a[num];if(num<100)return b[Math.floor(num/10)]+(num%10?' '+a[num%10]:'');if(num<1000)return a[Math.floor(num/100)]+' Hundred'+(num%100?' '+inWords(num%100):'');if(num<1000000)return inWords(Math.floor(num/1000))+' Thousand'+(num%1000?' '+inWords(num%1000):'');return inWords(Math.floor(num/1000000))+' Million'+(num%1000000?' '+inWords(num%1000000):'');}document.getElementById('numWordResult').innerText=inWords(n);}
+function toRoman(){let num=parseInt(document.getElementById('romanInput').value);if(!num||num<1||num>3999)return alert('Enter a number between 1 and 3999');const vals=[1000,900,500,400,100,90,50,40,10,9,5,4,1];const syms=['M','CM','D','CD','C','XC','L','XL','X','IX','V','IV','I'];let res='';for(let i=0;i<vals.length;i++){while(num>=vals[i]){res+=syms[i];num-=vals[i];}}document.getElementById('romanResult').innerText='Roman Numeral: '+res;}
+function encodeB64(){let t=document.getElementById('b64Input').value;if(!t)return alert('Enter text first');document.getElementById('b64Result').innerText='Encoded: '+btoa(unescape(encodeURIComponent(t)));}function decodeB64(){let t=document.getElementById('b64Input').value;if(!t)return alert('Enter Base64 text first');try{document.getElementById('b64Result').innerText='Decoded: '+decodeURIComponent(escape(atob(t)));}catch(e){alert('Invalid Base64 string');}}
+
    
 </script>
 <!-- HOW TO USE GUIDE FOR MEDIA & PDF TOOLS -->
