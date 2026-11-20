@@ -89,6 +89,12 @@
 <button class="tab-btn" onclick="openTool('num-words')">🧾 Number to Words</button>
 <button class="tab-btn" onclick="openTool('roman-conv')">📏 Roman Numerals</button>
 <button class="tab-btn" onclick="openTool('base64-tool')">📝 Base64 Encoder</button>
+<button class="tab-btn" onclick="openTool('sleep-calc')">🔋 Sleep Calculator</button>
+<button class="tab-btn" onclick="openTool('water-calc')">💧 Water Intake</button>
+<button class="tab-btn" onclick="openTool('aspect-calc')">⚖️ Aspect Ratio</button>
+<button class="tab-btn" onclick="openTool('bin-conv')">🔢 Binary Converter</button>
+<button class="tab-btn" onclick="openTool('dedupe-text')">📋 Remove Duplicates</button>
+            
             
           
            
@@ -524,6 +530,53 @@
 <p id="b64Result" style="font-weight:bold;color:#0f172a;margin-top:10px;word-break:break-all;text-align:center;"></p>
 <p style="font-size:14px;color:#555;margin-top:12px;text-align:left;"><strong>Developer &amp; Student Base64 Utility:</strong> Safely encode plain text into Base64 format or decode Base64 strings instantly in your browser.</p>
 </div>
+<!-- 33. SLEEP CYCLE & BEDTIME CALCULATOR -->
+<div id="sleep-calc" class="tool-card">
+<h2>🔋 Sleep Cycle &amp; Bedtime Calculator</h2>
+<label style="font-size:13px;color:#555;">Select Your Wake-Up Time:</label>
+<input type="time" id="wakeTime" value="07:00">
+<button class="action-btn" onclick="calcSleep()">Calculate Best Bedtimes</button>
+<p id="sleepResult" style="font-weight:bold;color:#2563eb;margin-top:10px;text-align:center;"></p>
+<p style="font-size:14px;color:#555;margin-top:12px;text-align:left;"><strong>Smart 90-Minute Sleep Cycle Planner:</strong> Wake up refreshed without grogginess by timing your bedtime around natural 90-minute REM sleep cycles.</p>
+</div>
+
+<!-- 34. DAILY WATER INTAKE CALCULATOR -->
+<div id="water-calc" class="tool-card">
+<h2>💧 Daily Water Intake Calculator</h2>
+<input type="number" id="waterWeight" placeholder="Enter Your Body Weight in kg (e.g. 70)">
+<button class="action-btn" onclick="calcWater()">Calculate Daily Water</button>
+<p id="waterResult" style="font-weight:bold;color:#0284c7;margin-top:10px;text-align:center;"></p>
+<p style="font-size:14px;color:#555;margin-top:12px;text-align:left;"><strong>Hydration &amp; Wellness Tracker:</strong> Find out how many liters and glasses of water your body needs daily based on your weight for peak energy and focus.</p>
+</div>
+
+<!-- 35. ASPECT RATIO & VIDEO RESOLUTION CALCULATOR -->
+<div id="aspect-calc" class="tool-card">
+<h2>⚖️ Aspect Ratio &amp; Screen Size Calculator</h2>
+<input type="number" id="arW" placeholder="Original Width (e.g. 1920)">
+<input type="number" id="arH" placeholder="Original Height (e.g. 1080)">
+<button class="action-btn" onclick="calcAspect()">Calculate Aspect Ratio</button>
+<p id="aspectResult" style="font-weight:bold;color:#7c3aed;margin-top:10px;text-align:center;"></p>
+<p style="font-size:14px;color:#555;margin-top:12px;text-align:left;"><strong>Creator &amp; Designer Resolution Tool:</strong> Instantly compute exact screen and video aspect ratios (16:9, 9:16, 4:3, 1:1) for YouTube, TikTok, and UI design.</p>
+</div>
+
+<!-- 36. BINARY, HEX & DECIMAL CONVERTER -->
+<div id="bin-conv" class="tool-card">
+<h2>🔢 Binary, Hex &amp; Decimal Converter</h2>
+<input type="number" id="decInput" placeholder="Enter a Decimal Number (e.g. 255)">
+<button class="action-btn" onclick="convNumberBase()">Convert to Binary &amp; Hex</button>
+<p id="baseResult" style="font-weight:bold;color:#16a34a;margin-top:10px;text-align:center;"></p>
+<p style="font-size:14px;color:#555;margin-top:12px;text-align:left;"><strong>Computer Science &amp; Coding Base Converter:</strong> Convert standard decimal integers into Binary (Base-2), Octal (Base-8), and Hexadecimal (Base-16) instantly.</p>
+</div>
+
+<!-- 37. DUPLICATE LINE & EXTRA SPACE REMOVER -->
+<div id="dedupe-text" class="tool-card">
+<h2>📋 Duplicate Line &amp; Extra Space Remover</h2>
+<textarea id="dedupeInput" rows="3" placeholder="Paste a list of items, emails, or lines with duplicates..."></textarea>
+<button class="action-btn" onclick="removeDuplicateLines()">🧹 Clean &amp; Remove Duplicates</button>
+<p id="dedupeStats" style="font-weight:bold;color:#059669;margin-top:8px;text-align:center;"></p>
+<p style="font-size:14px;color:#555;margin-top:12px;text-align:left;"><strong>List Cleaner &amp; Data Deduplicator:</strong> Automatically remove repeated lines and trim messy blank spaces from any text list in one click.</p>
+</div>
+    
     
     
  </div>  
@@ -785,6 +838,11 @@ function genPIN(){let min=parseInt(document.getElementById('minNum').value)||1,m
 function repeatTxt(){let s=document.getElementById('repText').value,c=Math.min(parseInt(document.getElementById('repCount').value)||1,500);if(!s)return alert('Enter some text');document.getElementById('repOutput').value=Array(c).fill(s).join(' ');}
 function reverseTxt(){let s=document.getElementById('repText').value;if(!s)return alert('Enter some text');document.getElementById('repOutput').value=s.split('').reverse().join('');}
 let pomoInt,pomoSec=1500;function startPomo(){clearInterval(pomoInt);pomoInt=setInterval(()=>{if(pomoSec<=0){clearInterval(pomoInt);alert('25 Minutes Complete! Take a 5-min break.');return;}pomoSec--;let m=String(Math.floor(pomoSec/60)).padStart(2,'0'),s=String(pomoSec%60).padStart(2,'0');document.getElementById('pomoDisplay').innerText=m+':'+s;},1000);}function resetPomo(){clearInterval(pomoInt);pomoSec=1500;document.getElementById('pomoDisplay').innerText='25:00';}
+function calcSleep(){let t=document.getElementById('wakeTime').value;if(!t)return alert('Select wake-up time');let [h,m]=t.split(':').map(Number);let base=new Date();base.setHours(h,m,0,0);let cycles=[6,5,4].map(c=>{let d=new Date(base.getTime()-(c*90+15)*60000);return d.toLocaleTimeString([],{hour:'2-digit',minute:'2-digit'});});document.getElementById('sleepResult').innerText='Best Bedtimes: '+cycles.join('  |  ')+' (Includes 15m to fall asleep)';}
+function calcWater(){let w=parseFloat(document.getElementById('waterWeight').value);if(!w||w<=0)return alert('Enter valid weight in kg');let liters=(w*0.033).toFixed(2);let glasses=Math.round((liters*1000)/250);document.getElementById('waterResult').innerText='Recommended: '+liters+' Liters / day (~'+glasses+' glasses of 250ml)';}
+function calcAspect(){let w=parseInt(document.getElementById('arW').value),h=parseInt(document.getElementById('arH').value);if(!w||!h)return alert('Enter width and height');function gcd(a,b){return b===0?a:gcd(b,a%b);}let g=gcd(w,h);document.getElementById('aspectResult').innerText='Aspect Ratio: '+(w/g)+':'+(h/g)+' ('+w+'×'+h+' px)';}
+function convNumberBase(){let n=parseInt(document.getElementById('decInput').value);if(isNaN(n)||n<0)return alert('Enter a valid positive integer');document.getElementById('baseResult').innerText='Binary: '+n.toString(2)+'  |  Hex: '+n.toString(16).toUpperCase()+'  |  Octal: '+n.toString(8);}
+function removeDuplicateLines(){let lines=document.getElementById('dedupeInput').value.split('\n').map(l=>l.trim()).filter(l=>l!=='');let unique=[...new Set(lines)];document.getElementById('dedupeInput').value=unique.join('\n');document.getElementById('dedupeStats').innerText='Cleaned! Kept '+unique.length+' unique lines (Removed '+(lines.length-unique.length)+' duplicates)';}
 
     </script>
 </body>
