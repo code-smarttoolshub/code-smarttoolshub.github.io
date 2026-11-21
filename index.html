@@ -96,6 +96,12 @@
 <button class="tab-btn" onclick="openTool('aspect-calc')">⚖️ Aspect Ratio</button>
 <button class="tab-btn" onclick="openTool('bin-conv')">🔢 Binary Converter</button>
 <button class="tab-btn" onclick="openTool('dedupe-text')">📋 Remove Duplicates</button>
+<button class="tab-btn" onclick="openTool('pct-change')">⚖️ % Change Calc</button>
+<button class="tab-btn" onclick="openTool('text-rev')">🔤 Text Reverser</button>
+<button class="tab-btn" onclick="openTool('px-rem')">📏 PX to REM</button>
+<button class="tab-btn" onclick="openTool('time-dec')">🕒 Time to Decimal</button>
+<button class="tab-btn" onclick="openTool('coin-flip')">🎲 Coin Flip</button>
+            
             
             
           
@@ -578,6 +584,54 @@
 <p id="dedupeStats" style="font-weight:bold;color:#059669;margin-top:8px;text-align:center;"></p>
 <p style="font-size:14px;color:#555;margin-top:12px;text-align:left;"><strong>List Cleaner &amp; Data Deduplicator:</strong> Automatically remove repeated lines and trim messy blank spaces from any text list in one click.</p>
 </div>
+<!-- 38. PERCENTAGE INCREASE & DECREASE CALCULATOR -->
+<div id="pct-change" class="tool-card">
+<h2>⚖️ Percentage Increase &amp; Decrease Calculator</h2>
+<input type="number" id="pcOld" placeholder="Original Value (e.g. 200)">
+<input type="number" id="pcNew" placeholder="New Value (e.g. 250)">
+<button class="action-btn" onclick="calcPctChange()">Calculate % Change</button>
+<p id="pcResult" style="font-weight:bold;color:#16a34a;margin-top:10px;text-align:center;"></p>
+<p style="font-size:14px;color:#555;margin-top:12px;text-align:left;"><strong>Business &amp; Finance Growth Tracker:</strong> Quickly calculate the exact percentage increase or decrease between two numbers for sales, discounts, and statistics.</p>
+</div>
+
+<!-- 39. TEXT REVERSER & PALINDROME CHECKER -->
+<div id="text-rev" class="tool-card">
+<h2>🔤 Text Reverser &amp; Palindrome Checker</h2>
+<textarea id="revInput" rows="2" placeholder="Type any word or sentence to reverse..."></textarea>
+<button class="action-btn" onclick="reverseTextTool()">🔄 Reverse Text</button>
+<p id="revResult" style="font-weight:bold;color:#2563eb;margin-top:10px;text-align:center;word-break:break-word;"></p>
+<p style="font-size:14px;color:#555;margin-top:12px;text-align:left;"><strong>Instant String Reverser &amp; Palindrome Tester:</strong> Flip text backwards in one click and check whether a word reads the same forward and backward.</p>
+</div>
+
+<!-- 40. PIXELS TO REM & EM CONVERTER -->
+<div id="px-rem" class="tool-card">
+<h2>📏 Pixels (PX) to REM &amp; EM Converter</h2>
+<input type="number" id="pxVal" placeholder="Enter Pixels (e.g. 24)">
+<input type="number" id="basePx" value="16" placeholder="Base Font Size (Default: 16px)">
+<button class="action-btn" onclick="convertPxRem()">Convert to REM</button>
+<p id="remResult" style="font-weight:bold;color:#7c3aed;margin-top:10px;text-align:center;"></p>
+<p style="font-size:14px;color:#555;margin-top:12px;text-align:left;"><strong>Responsive CSS &amp; Web Design Unit Converter:</strong> Convert pixel values into scalable REM and EM units for modern mobile-friendly websites.</p>
+</div>
+
+<!-- 41. HOURS & MINUTES TO DECIMAL TIME CONVERTER -->
+<div id="time-dec" class="tool-card">
+<h2>🕒 Hours &amp; Minutes to Decimal Time Converter</h2>
+<input type="number" id="tdHours" placeholder="Hours (e.g. 7)">
+<input type="number" id="tdMins" placeholder="Minutes (e.g. 45)">
+<button class="action-btn" onclick="convertTimeDec()">Convert to Decimal Hours</button>
+<p id="tdResult" style="font-weight:bold;color:#0284c7;margin-top:10px;text-align:center;"></p>
+<p style="font-size:14px;color:#555;margin-top:12px;text-align:left;"><strong>Timesheet &amp; Freelancer Billing Calculator:</strong> Convert standard work hours and minutes into exact decimal hours for accurate payroll and invoicing.</p>
+</div>
+
+<!-- 42. VIRTUAL COIN FLIP & DECISION MAKER -->
+<div id="coin-flip" class="tool-card">
+<h2>🎲 Virtual Coin Flip &amp; Decision Maker</h2>
+<div id="coinVisual" style="width:90px;height:90px;border-radius:50%;background:#f59e0b;color:#fff;font-weight:bold;font-size:20px;display:flex;align-items:center;justify-content:center;margin:12px auto;box-shadow:0 4px 10px rgba(0,0,0,0.15);">FLIP</div>
+<button class="action-btn" onclick="flipVirtualCoin()">🪙 Toss Coin Now</button>
+<p id="coinStats" style="font-weight:bold;color:#333;margin-top:10px;text-align:center;">Click above to flip a fair 50/50 coin!</p>
+<p style="font-size:14px;color:#555;margin-top:12px;text-align:left;"><strong>Instant 50/50 Random Coin Tosser:</strong> Settle quick choices, sports tosses, and classroom games online with a fair digital coin flip.</p>
+</div>
+    
     
     
     
@@ -845,6 +899,11 @@ function calcWater(){let w=parseFloat(document.getElementById('waterWeight').val
 function calcAspect(){let w=parseInt(document.getElementById('arW').value),h=parseInt(document.getElementById('arH').value);if(!w||!h)return alert('Enter width and height');function gcd(a,b){return b===0?a:gcd(b,a%b);}let g=gcd(w,h);document.getElementById('aspectResult').innerText='Aspect Ratio: '+(w/g)+':'+(h/g)+' ('+w+'×'+h+' px)';}
 function convNumberBase(){let n=parseInt(document.getElementById('decInput').value);if(isNaN(n)||n<0)return alert('Enter a valid positive integer');document.getElementById('baseResult').innerText='Binary: '+n.toString(2)+'  |  Hex: '+n.toString(16).toUpperCase()+'  |  Octal: '+n.toString(8);}
 function removeDuplicateLines(){let lines=document.getElementById('dedupeInput').value.split('\n').map(l=>l.trim()).filter(l=>l!=='');let unique=[...new Set(lines)];document.getElementById('dedupeInput').value=unique.join('\n');document.getElementById('dedupeStats').innerText='Cleaned! Kept '+unique.length+' unique lines (Removed '+(lines.length-unique.length)+' duplicates)';}
+function calcPctChange(){let o=parseFloat(document.getElementById('pcOld').value),n=parseFloat(document.getElementById('pcNew').value);if(isNaN(o)||isNaN(n)||o===0)return alert('Enter valid original and new values');let diff=((n-o)/Math.abs(o))*100;let label=diff>=0?'Increase':'Decrease';document.getElementById('pcResult').innerText=Math.abs(diff).toFixed(2)+'% '+label+' ('+(n>=o?'+':'')+(n-o).toFixed(2)+')';}
+function reverseTextTool(){let t=document.getElementById('revInput').value;if(!t)return alert('Enter text first');let rev=t.split('').reverse().join('');let clean=t.toLowerCase().replace(/[^a-z0-9]/g,'');let isPal=clean.length>1&&clean===clean.split('').reverse().join('');document.getElementById('revResult').innerText='Reversed: '+rev+(isPal?'  ✅ (It is a Palindrome!)':'');}
+function convertPxRem(){let px=parseFloat(document.getElementById('pxVal').value),base=parseFloat(document.getElementById('basePx').value)||16;if(isNaN(px))return alert('Enter pixel value');let rem=(px/base).toFixed(4).replace(/\.?0+$/,'');document.getElementById('remResult').innerText=px+'px = '+rem+'rem / '+rem+'em (at '+base+'px base)';}
+function convertTimeDec(){let h=parseFloat(document.getElementById('tdHours').value)||0,m=parseFloat(document.getElementById('tdMins').value)||0;let dec=(h+m/60).toFixed(2);document.getElementById('tdResult').innerText=h+'h '+m+'m = '+dec+' Decimal Hours';}
+let headsCnt=0,tailsCnt=0;function flipVirtualCoin(){let isHeads=Math.random()<0.5;if(isHeads)headsCnt++;else tailsCnt++;let el=document.getElementById('coinVisual');el.style.background=isHeads?'#f59e0b':'#3b82f6';el.innerText=isHeads?'HEADS':'TAILS';document.getElementById('coinStats').innerText='Result: '+(isHeads?'HEADS':'TAILS')+'  |  Total — Heads: '+headsCnt+', Tails: '+tailsCnt;}
 
     </script>
 </body>
