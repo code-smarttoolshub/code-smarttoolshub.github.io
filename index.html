@@ -101,6 +101,11 @@
 <button class="tab-btn" onclick="openTool('px-rem')">📏 PX to REM</button>
 <button class="tab-btn" onclick="openTool('time-dec')">🕒 Time to Decimal</button>
 <button class="tab-btn" onclick="openTool('coin-flip')">🎲 Coin Flip</button>
+<button class="tab-btn" onclick="openTool('elec-cost')">⚡ Electricity Cost</button>
+<button class="tab-btn" onclick="openTool('temp-conv')">🌡️ Temp Converter</button>
+<button class="tab-btn" onclick="openTool('grade-target')">📊 Grade Target</button>
+<button class="tab-btn" onclick="openTool('user-gen')">🔐 Username Gen</button>
+<button class="tab-btn" onclick="openTool('read-time')">⏱️ Reading Time</button>
             
             
             
@@ -631,6 +636,59 @@
 <p id="coinStats" style="font-weight:bold;color:#333;margin-top:10px;text-align:center;">Click above to flip a fair 50/50 coin!</p>
 <p style="font-size:14px;color:#555;margin-top:12px;text-align:left;"><strong>Instant 50/50 Random Coin Tosser:</strong> Settle quick choices, sports tosses, and classroom games online with a fair digital coin flip.</p>
 </div>
+<!-- 43. ELECTRICITY BILL & WATTAGE COST CALCULATOR -->
+<div id="elec-cost" class="tool-card">
+<h2>⚡ Electricity Bill &amp; Wattage Cost Calculator</h2>
+<input type="number" id="ecWatts" placeholder="Appliance Power in Watts (e.g. 1500 for Heater/AC)">
+<input type="number" id="ecHours" placeholder="Hours Used Per Day (e.g. 5)">
+<input type="number" id="ecRate" placeholder="Cost per kWh / Unit (e.g. 0.15)">
+<button class="action-btn" onclick="calcElecCost()">Calculate Power Cost</button>
+<p id="ecResult" style="font-weight:bold;color:#16a34a;margin-top:10px;text-align:center;"></p>
+<p style="font-size:14px;color:#555;margin-top:12px;text-align:left;"><strong>Home &amp; Hostel Energy Savings Estimator:</strong> Calculate daily, monthly, and yearly electricity usage (kWh) and cost for any home appliance.</p>
+</div>
+
+<!-- 44. TEMPERATURE CONVERTER (C / F / K) -->
+<div id="temp-conv" class="tool-card">
+<h2>🌡️ Temperature Converter (Celsius, Fahrenheit &amp; Kelvin)</h2>
+<input type="number" id="tcVal" placeholder="Enter Temperature Value (e.g. 37)">
+<select id="tcUnit">
+<option value="C">Celsius (°C)</option>
+<option value="F">Fahrenheit (°F)</option>
+<option value="K">Kelvin (K)</option>
+</select>
+<button class="action-btn" onclick="convertTempTool()">Convert Temperature</button>
+<p id="tcResult" style="font-weight:bold;color:#dc2626;margin-top:10px;text-align:center;"></p>
+<p style="font-size:14px;color:#555;margin-top:12px;text-align:left;"><strong>Weather, Cooking &amp; Science Unit Converter:</strong> Instantly convert temperatures between Celsius, Fahrenheit, and Kelvin with high precision.</p>
+</div>
+
+<!-- 45. FINAL EXAM GRADE TARGET CALCULATOR -->
+<div id="grade-target" class="tool-card">
+<h2>📊 Final Exam Grade Target Calculator</h2>
+<input type="number" id="gtCurrent" placeholder="Current Grade % (e.g. 78)">
+<input type="number" id="gtTarget" placeholder="Desired Overall Grade % (e.g. 85)">
+<input type="number" id="gtWeight" placeholder="Final Exam Weight % (e.g. 40)">
+<button class="action-btn" onclick="calcGradeTarget()">Find Required Exam Score</button>
+<p id="gtResult" style="font-weight:bold;color:#2563eb;margin-top:10px;text-align:center;"></p>
+<p style="font-size:14px;color:#555;margin-top:12px;text-align:left;"><strong>University &amp; College Exam Planner:</strong> Find out the exact score you need on your final exam to achieve your target course grade.</p>
+</div>
+
+<!-- 46. RANDOM USERNAME & SOCIAL HANDLE GENERATOR -->
+<div id="user-gen" class="tool-card">
+<h2>🔐 Random Username &amp; Social Handle Generator</h2>
+<input type="text" id="ugKeyword" placeholder="Enter a keyword or your name (e.g. Alex, Tech, Glam)">
+<button class="action-btn" onclick="generateUsernames()">✨ Generate 6 Unique Usernames</button>
+<p id="ugResult" style="font-weight:bold;color:#7c3aed;margin-top:10px;text-align:center;line-height:1.8;"></p>
+<p style="font-size:14px;color:#555;margin-top:12px;text-align:left;"><strong>Instagram, TikTok &amp; Gaming Handle Creator:</strong> Generate catchy, brandable usernames and gamertags in one click.</p>
+</div>
+
+<!-- 47. READING TIME & SPEAKING DURATION ESTIMATOR -->
+<div id="read-time" class="tool-card">
+<h2>⏱️ Reading Time &amp; Speaking Duration Estimator</h2>
+<textarea id="rtInput" rows="3" placeholder="Paste your article, essay, or presentation script here..."></textarea>
+<button class="action-btn" onclick="estimateReadTime()">Calculate Reading &amp; Speech Time</button>
+<p id="rtResult" style="font-weight:bold;color:#0284c7;margin-top:10px;text-align:center;"></p>
+<p style="font-size:14px;color:#555;margin-top:12px;text-align:left;"><strong>Bloggers, Students &amp; Public Speakers Tool:</strong> Estimate exact silent reading time (200 WPM) and presentation speaking time (130 WPM).</p>
+</div>
     
     
     
@@ -904,6 +962,11 @@ function reverseTextTool(){let t=document.getElementById('revInput').value;if(!t
 function convertPxRem(){let px=parseFloat(document.getElementById('pxVal').value),base=parseFloat(document.getElementById('basePx').value)||16;if(isNaN(px))return alert('Enter pixel value');let rem=(px/base).toFixed(4).replace(/\.?0+$/,'');document.getElementById('remResult').innerText=px+'px = '+rem+'rem / '+rem+'em (at '+base+'px base)';}
 function convertTimeDec(){let h=parseFloat(document.getElementById('tdHours').value)||0,m=parseFloat(document.getElementById('tdMins').value)||0;let dec=(h+m/60).toFixed(2);document.getElementById('tdResult').innerText=h+'h '+m+'m = '+dec+' Decimal Hours';}
 let headsCnt=0,tailsCnt=0;function flipVirtualCoin(){let isHeads=Math.random()<0.5;if(isHeads)headsCnt++;else tailsCnt++;let el=document.getElementById('coinVisual');el.style.background=isHeads?'#f59e0b':'#3b82f6';el.innerText=isHeads?'HEADS':'TAILS';document.getElementById('coinStats').innerText='Result: '+(isHeads?'HEADS':'TAILS')+'  |  Total — Heads: '+headsCnt+', Tails: '+tailsCnt;}
+function calcElecCost(){let w=parseFloat(document.getElementById('ecWatts').value),h=parseFloat(document.getElementById('ecHours').value),r=parseFloat(document.getElementById('ecRate').value);if(!w||!h||!r)return alert('Enter Watts, Hours, and Rate');let kwhDay=(w*h)/1000;let daily=kwhDay*r,monthly=daily*30;document.getElementById('ecResult').innerText='Daily: '+kwhDay.toFixed(2)+' kWh ($'+daily.toFixed(2)+')  |  Monthly: $'+monthly.toFixed(2);}
+function convertTempTool(){let v=parseFloat(document.getElementById('tcVal').value),u=document.getElementById('tcUnit').value;if(isNaN(v))return alert('Enter a temperature');let c=u==='C'?v:u==='F'?(v-32)*5/9:v-273.15;let f=(c*9/5)+32,k=c+273.15;document.getElementById('tcResult').innerText=c.toFixed(2)+' °C  =  '+f.toFixed(2)+' °F  =  '+k.toFixed(2)+' K';}
+function calcGradeTarget(){let cur=parseFloat(document.getElementById('gtCurrent').value),tar=parseFloat(document.getElementById('gtTarget').value),w=parseFloat(document.getElementById('gtWeight').value);if(isNaN(cur)||isNaN(tar)||!w||w>=100)return alert('Enter valid grades and exam weight (1-99%)');let req=(tar-(cur*(1-w/100)))/(w/100);document.getElementById('gtResult').innerText='You need '+req.toFixed(1)+'% on your final exam to get '+tar+'% overall!';}
+function generateUsernames(){let base=(document.getElementById('ugKeyword').value.trim().replace(/[^a-zA-Z0-9]/g,''))||'SmartUser';let adj=['Pro','Nova','Vibe','Pixel','Zen','Aura','Prime','Next','Elite','Swift'];let out=[];for(let i=0;i<6;i++){let a=adj[Math.floor(Math.random()*adj.length)];let num=Math.floor(10+Math.random()*89);out.push('@'+base+a+num);}document.getElementById('ugResult').innerHTML=out.join(' &nbsp;•&nbsp; ');}
+function estimateReadTime(){let txt=document.getElementById('rtInput').value.trim();if(!txt)return alert('Paste some text first');let words=txt.split(/\s+/).length;let rSec=Math.ceil((words/200)*60),sSec=Math.ceil((words/130)*60);document.getElementById('rtResult').innerText=words+' Words  |  Read: '+Math.floor(rSec/60)+'m '+(rSec%60)+'s  |  Speak: '+Math.floor(sSec/60)+'m '+(sSec%60)+'s';}
 
     </script>
 </body>
