@@ -108,6 +108,11 @@
 <button class="tab-btn" onclick="openTool('grade-target')">📊 Grade Target</button>
 <button class="tab-btn" onclick="openTool('user-gen')">🔐 Username Gen</button>
 <button class="tab-btn" onclick="openTool('read-time')">⏱️ Reading Time</button>
+<button class="tab-btn" onclick="openTool('ideal-wt')">⚖️ Ideal Weight</button>
+<button class="tab-btn" onclick="openTool('yt-money')">🎬 YouTube Calc</button>
+<button class="tab-btn" onclick="openTool('case-conv')">🔤 Case Converter</button>
+<button class="tab-btn" onclick="openTool('run-pace')">🏃 Running Pace</button>
+<button class="tab-btn" onclick="openTool('tip-split')">🧾 Tip &amp; Split</button>
             
             
             
@@ -691,6 +696,61 @@
 <p id="rtResult" style="font-weight:bold;color:#0284c7;margin-top:10px;text-align:center;"></p>
 <p style="font-size:14px;color:#555;margin-top:12px;text-align:left;"><strong>Bloggers, Students &amp; Public Speakers Tool:</strong> Estimate exact silent reading time (200 WPM) and presentation speaking time (130 WPM).</p>
 </div>
+<!-- 48. IDEAL BODY WEIGHT CALCULATOR -->
+<div id="ideal-wt" class="tool-card">
+<h2>⚖️ Ideal Body Weight &amp; Healthy Range Calculator</h2>
+<select id="iwGender">
+<option value="male">Male</option>
+<option value="female">Female</option>
+</select>
+<input type="number" id="iwHeight" placeholder="Enter Height in cm (e.g. 175)">
+<button class="action-btn" onclick="calcIdealWeight()">Calculate Ideal Weight</button>
+<p id="iwResult" style="font-weight:bold;color:#16a34a;margin-top:10px;text-align:center;"></p>
+<p style="font-size:14px;color:#555;margin-top:12px;text-align:left;"><strong>Fitness &amp; Health Target Estimator:</strong> Find your medically recommended healthy weight range based on your height and gender.</p>
+</div>
+
+<!-- 49. YOUTUBE MONEY & RPM EARNINGS CALCULATOR -->
+<div id="yt-money" class="tool-card">
+<h2>🎬 YouTube Video &amp; Shorts Money Estimator</h2>
+<input type="number" id="ytViews" placeholder="Total Video Views (e.g. 50000)">
+<input type="number" id="ytRpm" placeholder="Estimated RPM in $ (e.g. 2.50)">
+<button class="action-btn" onclick="calcYtMoney()">Estimate Earnings</button>
+<p id="ytResult" style="font-weight:bold;color:#dc2626;margin-top:10px;text-align:center;"></p>
+<p style="font-size:14px;color:#555;margin-top:12px;text-align:left;"><strong>Content Creator Revenue Planner:</strong> Quickly estimate potential ad revenue from YouTube long-form videos or Shorts based on views and RPM.</p>
+</div>
+
+<!-- 50. TEXT CASE CONVERTER -->
+<div id="case-conv" class="tool-card">
+<h2>🔤 Text Case Converter (UPPERCASE, lowercase &amp; Title Case)</h2>
+<textarea id="ccInput" rows="3" placeholder="Paste or type your text here..."></textarea>
+<div style="display:flex;gap:8px;flex-wrap:wrap;justify-content:center;margin-top:8px;">
+<button class="action-btn" style="width:auto;padding:8px 14px;" onclick="convertCase('upper')">UPPERCASE</button>
+<button class="action-btn" style="width:auto;padding:8px 14px;" onclick="convertCase('lower')">lowercase</button>
+<button class="action-btn" style="width:auto;padding:8px 14px;" onclick="convertCase('title')">Title Case</button>
+</div>
+<p style="font-size:14px;color:#555;margin-top:12px;text-align:left;"><strong>Writers, Students &amp; Editors Utility:</strong> Instantly format messy text into uppercase, lowercase, or properly capitalized title case in one click.</p>
+</div>
+
+<!-- 51. RUNNING PACE & SPEED CALCULATOR -->
+<div id="run-pace" class="tool-card">
+<h2>🏃 Running Pace, Speed &amp; Marathon Calculator</h2>
+<input type="number" id="rpDist" placeholder="Distance in Kilometers (e.g. 5)">
+<input type="number" id="rpMins" placeholder="Total Time in Minutes (e.g. 25)">
+<button class="action-btn" onclick="calcRunPace()">Calculate Pace &amp; Speed</button>
+<p id="rpResult" style="font-weight:bold;color:#2563eb;margin-top:10px;text-align:center;"></p>
+<p style="font-size:14px;color:#555;margin-top:12px;text-align:left;"><strong>Runners &amp; Athletes Training Tool:</strong> Calculate your exact pace per kilometer (min/km) and average running speed (km/h).</p>
+</div>
+
+<!-- 52. RESTAURANT TIP & BILL SPLITTER -->
+<div id="tip-split" class="tool-card">
+<h2>🧾 Restaurant Tip &amp; Split Bill Calculator</h2>
+<input type="number" id="tsBill" placeholder="Total Bill Amount ($)">
+<input type="number" id="tsTip" placeholder="Tip Percentage % (e.g. 15)">
+<input type="number" id="tsPeople" placeholder="Number of People Splitting (e.g. 4)">
+<button class="action-btn" onclick="calcTipSplit()">Calculate Split Amount</button>
+<p id="tsResult" style="font-weight:bold;color:#7c3aed;margin-top:10px;text-align:center;"></p>
+<p style="font-size:14px;color:#555;margin-top:12px;text-align:left;"><strong>Dining Out &amp; Group Travel Calculator:</strong> Calculate tip amount, grand total, and exact cost per person when splitting bills with friends.</p>
+</div>
     
     
     
@@ -969,6 +1029,11 @@ function convertTempTool(){let v=parseFloat(document.getElementById('tcVal').val
 function calcGradeTarget(){let cur=parseFloat(document.getElementById('gtCurrent').value),tar=parseFloat(document.getElementById('gtTarget').value),w=parseFloat(document.getElementById('gtWeight').value);if(isNaN(cur)||isNaN(tar)||!w||w>=100)return alert('Enter valid grades and exam weight (1-99%)');let req=(tar-(cur*(1-w/100)))/(w/100);document.getElementById('gtResult').innerText='You need '+req.toFixed(1)+'% on your final exam to get '+tar+'% overall!';}
 function generateUsernames(){let base=(document.getElementById('ugKeyword').value.trim().replace(/[^a-zA-Z0-9]/g,''))||'SmartUser';let adj=['Pro','Nova','Vibe','Pixel','Zen','Aura','Prime','Next','Elite','Swift'];let out=[];for(let i=0;i<6;i++){let a=adj[Math.floor(Math.random()*adj.length)];let num=Math.floor(10+Math.random()*89);out.push('@'+base+a+num);}document.getElementById('ugResult').innerHTML=out.join(' &nbsp;•&nbsp; ');}
 function estimateReadTime(){let txt=document.getElementById('rtInput').value.trim();if(!txt)return alert('Paste some text first');let words=txt.split(/\s+/).length;let rSec=Math.ceil((words/200)*60),sSec=Math.ceil((words/130)*60);document.getElementById('rtResult').innerText=words+' Words  |  Read: '+Math.floor(rSec/60)+'m '+(rSec%60)+'s  |  Speak: '+Math.floor(sSec/60)+'m '+(sSec%60)+'s';}
+function calcIdealWeight(){let g=document.getElementById('iwGender').value,h=parseFloat(document.getElementById('iwHeight').value);if(!h||h<100)return alert('Enter valid height in cm');let inches=h/2.54;let base=(g==='male'?50:45.5)+2.3*(inches-60);let min=(base*0.92).toFixed(1),max=(base*1.08).toFixed(1);document.getElementById('iwResult').innerText='Ideal Weight: '+base.toFixed(1)+' kg  (Healthy Range: '+min+' – '+max+' kg)';}
+function calcYtMoney(){let v=parseFloat(document.getElementById('ytViews').value),r=parseFloat(document.getElementById('ytRpm').value);if(!v||isNaN(r))return alert('Enter views and RPM');let earn=(v/1000)*r;document.getElementById('ytResult').innerText='Estimated Revenue: $'+earn.toFixed(2)+'  (Monthly @ 30 videos: $'+(earn*30).toFixed(2)+')';}
+function convertCase(type){let el=document.getElementById('ccInput');if(!el.value.trim())return alert('Enter text first');if(type==='upper')el.value=el.value.toUpperCase();else if(type==='lower')el.value=el.value.toLowerCase();else el.value=el.value.toLowerCase().replace(/\b\w/g,c=>c.toUpperCase());}
+function calcRunPace(){let d=parseFloat(document.getElementById('rpDist').value),m=parseFloat(document.getElementById('rpMins').value);if(!d||!m)return alert('Enter distance and time');let pace=m/d,pMin=Math.floor(pace),pSec=Math.round((pace-pMin)*60);let speed=(d/(m/60)).toFixed(2);document.getElementById('rpResult').innerText='Pace: '+pMin+':'+(pSec<10?'0':'')+pSec+' min/km  |  Speed: '+speed+' km/h';}
+function calcTipSplit(){let b=parseFloat(document.getElementById('tsBill').value),t=parseFloat(document.getElementById('tsTip').value)||0,p=parseInt(document.getElementById('tsPeople').value)||1;if(!b)return alert('Enter bill amount');let tipAmt=b*(t/100),tot=b+tipAmt,per=tot/p;document.getElementById('tsResult').innerText='Tip: $'+tipAmt.toFixed(2)+'  |  Total: $'+tot.toFixed(2)+'  |  Per Person: $'+per.toFixed(2);}
 
     </script>
 </body>
