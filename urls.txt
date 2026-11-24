@@ -1,4 +1,7 @@
 https://code-smarttoolshub.github.io/
-https://github.io
-https://github.io
-https://github.io
+https://code-smarttoolshub.github.io/word-counter.html
+https://code-smarttoolshub.github.io/age-calculator.html
+https://code-smarttoolshub.github.io/password-generator.html
+https://code-smarttoolshub.github.io/about.html
+https://code-smarttoolshub.github.io/contact.html
+https://code-smarttoolshub.github.io/privacy-policy.html
