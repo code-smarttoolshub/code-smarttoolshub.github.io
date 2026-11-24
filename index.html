@@ -83,8 +83,8 @@
 <button class="tab-btn" onclick="openTool('pin-gen')">🎲 PIN &amp; Random</button>
 <button class="tab-btn" onclick="openTool('text-rep')">🔤 Text Repeater</button>
 <button class="tab-btn" onclick="openTool('pomo-timer')">⏱️ Pomodoro Timer</button>
-<button class="tab-btn" onclick="openTool('unit-conv')">⚖️ Unit Converter</button>
-<button class="tab-btn" onclick="openTool('sale-calc')">🧾 Sale Discount</button>
+
+
 <button class="tab-btn" onclick="openTool('date-diff')">📅 Days Counter</button>
 <button class="tab-btn" onclick="openTool('pass-check')">🔐 Password Check</button>
 <button class="tab-btn" onclick="openTool('tts-reader')">🗣️ Voice Reader</button>
@@ -99,7 +99,7 @@
 <button class="tab-btn" onclick="openTool('bin-conv')">🔢 Binary Converter</button>
 <button class="tab-btn" onclick="openTool('dedupe-text')">📋 Remove Duplicates</button>
 <button class="tab-btn" onclick="openTool('pct-change')">⚖️ % Change Calc</button>
-<button class="tab-btn" onclick="openTool('text-rev')">🔤 Text Reverser</button>
+
 <button class="tab-btn" onclick="openTool('px-rem')">📏 PX to REM</button>
 <button class="tab-btn" onclick="openTool('time-dec')">🕒 Time to Decimal</button>
 <button class="tab-btn" onclick="openTool('coin-flip')">🎲 Coin Flip</button>
@@ -112,7 +112,7 @@
 <button class="tab-btn" onclick="openTool('yt-money')">🎬 YouTube Calc</button>
 <button class="tab-btn" onclick="openTool('case-conv')">🔤 Case Converter</button>
 <button class="tab-btn" onclick="openTool('run-pace')">🏃 Running Pace</button>
-<button class="tab-btn" onclick="openTool('tip-split')">🧾 Tip &amp; Split</button>
+
             
             
             
@@ -238,28 +238,7 @@
     </div>
 </div>
 
-<!-- 9. SMART UNIT CONVERTER -->
-<div id="unit-converter" class="tool-card">
-    <h2>📏 Smart Unit Converter</h2>
-    <label>Value to Convert:</label>
-    <input type="number" id="unitValue" value="1" oninput="runConversion()">
-    <label>From:</label>
-    <select id="unitFrom" onchange="runConversion()">
-        <option value="m">Meters</option>
-        <option value="km">Kilometers</option>
-        <option value="mi">Miles</option>
-    </select>
-    <label>To:</label>
-    <select id="unitTo" onchange="runConversion()">
-        <option value="m">Meters</option>
-        <option value="km">Kilometers</option>
-        <option value="mi">Miles</option>
-    </select>
-    <div id="unitResult" class="result-box">Result: 1.00 m</div>
-    <div class="seo-description">
-        Perform swift calculations across different metric and imperial units using our Smart Unit Converter. Ideal for students, engineers, and travelers who need to switch measurements between meters, kilometers, and miles accurately. It handles immediate real-time rendering inside your local web interface.
-    </div>
-</div>
+
 
 <!-- 10. STOPWATCH & PRECISION TIMER -->
 <div id="stopwatch" class="tool-card">
@@ -460,15 +439,7 @@
 <p style="font-size:14px;color:#555;margin-top:12px;text-align:left;"><strong>Instant Measurement &amp; Temperature Converter:</strong> Convert kilometers to miles, kilograms to pounds, and Celsius to Fahrenheit accurately for school, travel, and fitness.</p>
 </div>
 
-<!-- 24. SALE DISCOUNT & SAVINGS CALCULATOR -->
-<div id="sale-calc" class="tool-card">
-<h2>🧾 Sale Discount &amp; Savings Calculator</h2>
-<input type="number" id="saleOrig" placeholder="Original Price (e.g. 120)">
-<input type="number" id="salePct" placeholder="Discount % OFF (e.g. 25)">
-<button class="action-btn" onclick="calcSale()">Calculate Final Price</button>
-<p id="saleResult" style="font-weight:bold;color:#db2777;margin-top:10px;text-align:center;"></p>
-<p style="font-size:14px;color:#555;margin-top:12px;text-align:left;"><strong>Smart Shopping Discount Finder:</strong> Instantly calculate how much money you save and the final checkout price during Black Friday, Eid, and seasonal sales.</p>
-</div>
+
 
 <!-- 25. DAYS BETWEEN TWO DATES CALCULATOR -->
 <div id="date-diff" class="tool-card">
@@ -606,14 +577,7 @@
 <p style="font-size:14px;color:#555;margin-top:12px;text-align:left;"><strong>Business &amp; Finance Growth Tracker:</strong> Quickly calculate the exact percentage increase or decrease between two numbers for sales, discounts, and statistics.</p>
 </div>
 
-<!-- 39. TEXT REVERSER & PALINDROME CHECKER -->
-<div id="text-rev" class="tool-card">
-<h2>🔤 Text Reverser &amp; Palindrome Checker</h2>
-<textarea id="revInput" rows="2" placeholder="Type any word or sentence to reverse..."></textarea>
-<button class="action-btn" onclick="reverseTextTool()">🔄 Reverse Text</button>
-<p id="revResult" style="font-weight:bold;color:#2563eb;margin-top:10px;text-align:center;word-break:break-word;"></p>
-<p style="font-size:14px;color:#555;margin-top:12px;text-align:left;"><strong>Instant String Reverser &amp; Palindrome Tester:</strong> Flip text backwards in one click and check whether a word reads the same forward and backward.</p>
-</div>
+
 
 <!-- 40. PIXELS TO REM & EM CONVERTER -->
 <div id="px-rem" class="tool-card">
@@ -741,17 +705,7 @@
 <p style="font-size:14px;color:#555;margin-top:12px;text-align:left;"><strong>Runners &amp; Athletes Training Tool:</strong> Calculate your exact pace per kilometer (min/km) and average running speed (km/h).</p>
 </div>
 
-<!-- 52. RESTAURANT TIP & BILL SPLITTER -->
-<div id="tip-split" class="tool-card">
-<h2>🧾 Restaurant Tip &amp; Split Bill Calculator</h2>
-<input type="number" id="tsBill" placeholder="Total Bill Amount ($)">
-<input type="number" id="tsTip" placeholder="Tip Percentage % (e.g. 15)">
-<input type="number" id="tsPeople" placeholder="Number of People Splitting (e.g. 4)">
-<button class="action-btn" onclick="calcTipSplit()">Calculate Split Amount</button>
-<p id="tsResult" style="font-weight:bold;color:#7c3aed;margin-top:10px;text-align:center;"></p>
-<p style="font-size:14px;color:#555;margin-top:12px;text-align:left;"><strong>Dining Out &amp; Group Travel Calculator:</strong> Calculate tip amount, grand total, and exact cost per person when splitting bills with friends.</p>
-</div>
-    
+
     
     
     
@@ -1020,7 +974,7 @@ function calcAspect(){let w=parseInt(document.getElementById('arW').value),h=par
 function convNumberBase(){let n=parseInt(document.getElementById('decInput').value);if(isNaN(n)||n<0)return alert('Enter a valid positive integer');document.getElementById('baseResult').innerText='Binary: '+n.toString(2)+'  |  Hex: '+n.toString(16).toUpperCase()+'  |  Octal: '+n.toString(8);}
 function removeDuplicateLines(){let lines=document.getElementById('dedupeInput').value.split('\n').map(l=>l.trim()).filter(l=>l!=='');let unique=[...new Set(lines)];document.getElementById('dedupeInput').value=unique.join('\n');document.getElementById('dedupeStats').innerText='Cleaned! Kept '+unique.length+' unique lines (Removed '+(lines.length-unique.length)+' duplicates)';}
 function calcPctChange(){let o=parseFloat(document.getElementById('pcOld').value),n=parseFloat(document.getElementById('pcNew').value);if(isNaN(o)||isNaN(n)||o===0)return alert('Enter valid original and new values');let diff=((n-o)/Math.abs(o))*100;let label=diff>=0?'Increase':'Decrease';document.getElementById('pcResult').innerText=Math.abs(diff).toFixed(2)+'% '+label+' ('+(n>=o?'+':'')+(n-o).toFixed(2)+')';}
-function reverseTextTool(){let t=document.getElementById('revInput').value;if(!t)return alert('Enter text first');let rev=t.split('').reverse().join('');let clean=t.toLowerCase().replace(/[^a-z0-9]/g,'');let isPal=clean.length>1&&clean===clean.split('').reverse().join('');document.getElementById('revResult').innerText='Reversed: '+rev+(isPal?'  ✅ (It is a Palindrome!)':'');}
+
 function convertPxRem(){let px=parseFloat(document.getElementById('pxVal').value),base=parseFloat(document.getElementById('basePx').value)||16;if(isNaN(px))return alert('Enter pixel value');let rem=(px/base).toFixed(4).replace(/\.?0+$/,'');document.getElementById('remResult').innerText=px+'px = '+rem+'rem / '+rem+'em (at '+base+'px base)';}
 function convertTimeDec(){let h=parseFloat(document.getElementById('tdHours').value)||0,m=parseFloat(document.getElementById('tdMins').value)||0;let dec=(h+m/60).toFixed(2);document.getElementById('tdResult').innerText=h+'h '+m+'m = '+dec+' Decimal Hours';}
 let headsCnt=0,tailsCnt=0;function flipVirtualCoin(){let isHeads=Math.random()<0.5;if(isHeads)headsCnt++;else tailsCnt++;let el=document.getElementById('coinVisual');el.style.background=isHeads?'#f59e0b':'#3b82f6';el.innerText=isHeads?'HEADS':'TAILS';document.getElementById('coinStats').innerText='Result: '+(isHeads?'HEADS':'TAILS')+'  |  Total — Heads: '+headsCnt+', Tails: '+tailsCnt;}
@@ -1033,7 +987,7 @@ function calcIdealWeight(){let g=document.getElementById('iwGender').value,h=par
 function calcYtMoney(){let v=parseFloat(document.getElementById('ytViews').value),r=parseFloat(document.getElementById('ytRpm').value);if(!v||isNaN(r))return alert('Enter views and RPM');let earn=(v/1000)*r;document.getElementById('ytResult').innerText='Estimated Revenue: $'+earn.toFixed(2)+'  (Monthly @ 30 videos: $'+(earn*30).toFixed(2)+')';}
 function convertCase(type){let el=document.getElementById('ccInput');if(!el.value.trim())return alert('Enter text first');if(type==='upper')el.value=el.value.toUpperCase();else if(type==='lower')el.value=el.value.toLowerCase();else el.value=el.value.toLowerCase().replace(/\b\w/g,c=>c.toUpperCase());}
 function calcRunPace(){let d=parseFloat(document.getElementById('rpDist').value),m=parseFloat(document.getElementById('rpMins').value);if(!d||!m)return alert('Enter distance and time');let pace=m/d,pMin=Math.floor(pace),pSec=Math.round((pace-pMin)*60);let speed=(d/(m/60)).toFixed(2);document.getElementById('rpResult').innerText='Pace: '+pMin+':'+(pSec<10?'0':'')+pSec+' min/km  |  Speed: '+speed+' km/h';}
-function calcTipSplit(){let b=parseFloat(document.getElementById('tsBill').value),t=parseFloat(document.getElementById('tsTip').value)||0,p=parseInt(document.getElementById('tsPeople').value)||1;if(!b)return alert('Enter bill amount');let tipAmt=b*(t/100),tot=b+tipAmt,per=tot/p;document.getElementById('tsResult').innerText='Tip: $'+tipAmt.toFixed(2)+'  |  Total: $'+tot.toFixed(2)+'  |  Per Person: $'+per.toFixed(2);}
+
 
     </script>
 </body>
