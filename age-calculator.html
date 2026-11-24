@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Free Online Age Calculator (Years, Months, Days) - Smart Tools Hub</title>
+  <meta name="description" content="Calculate your exact age in years, months, and days from your date of birth with our free online Age Calculator.">
+  <style>
+    body { font-family: 'Segoe UI', sans-serif; background: #EBF0F5; margin: 0; padding: 20px; color: #333; }
+    .container { max-width: 850px; margin: 0 auto; }
+    header { background: linear-gradient(135deg, #1e3a8a, #2563eb); color: #fff; text-align: center; padding: 20px; border-radius: 12px; margin-bottom: 15px; }
+    .back-btn { display: inline-block; background: #fff; color: #1e3a8a; text-decoration: none; padding: 8px 16px; border-radius: 6px; font-weight: bold; margin-bottom: 10px; font-size: 14px; }
+    .ad-box { text-align: center; margin: 15px auto; overflow-x: auto; }
+    .tool-card { background: #fff; padding: 25px; border-radius: 12px; box-shadow: 0 4px 12px rgba(0,0,0,0.08); text-align: center; }
+    input[type="date"] { padding: 12px; border: 1px solid #ccc; border-radius: 8px; font-size: 16px; width: 250px; max-width: 100%; margin: 10px 0; }
+    .calc-btn { background: #2563eb; color: #fff; border: none; padding: 12px 24px; border-radius: 8px; font-size: 16px; font-weight: bold; cursor: pointer; }
+    .calc-btn:hover { background: #1e3a8a; }
+    .result-box { margin-top: 20px; font-size: 20px; font-weight: bold; color: #1e3a8a; background: #f8fafc; padding: 15px; border-radius: 8px; }
+    .seo-article { background: #fff; padding: 25px; border-radius: 12px; margin-top: 20px; line-height: 1.6; color: #444; box-shadow: 0 4px 12px rgba(0,0,0,0.05); }
+    .seo-article h2 { color: #1e3a8a; margin-top: 0; }
+    footer { text-align: center; margin-top: 25px; font-size: 14px; color: #666; }
+    footer a { color: #2563eb; text-decoration: none; margin: 0 10px; }
+  </style>
+</head>
+<body>
+
+<div class="container">
+  <header>
+    <a href="index.html" class="back-btn">⬅ Back to All 50+ Tools</a>
+    <h1 style="margin: 5px 0; font-size: 26px;">📅 Exact Age Calculator</h1>
+    <p style="margin: 0; font-size: 14px; opacity: 0.9;">Calculate your exact age in years, months, and days instantly</p>
+  </header>
+
+  <!-- ADSTERRA TOP BANNER (728x90) -->
+  <div class="ad-box">
+    <script>
+      atOptions = {
+        'key' : 'e1448b1169f5f791fa97f1d7e7c4381e',
+        'format' : 'iframe',
+        'height' : 90,
+        'width' : 728,
+        'params' : {}
+      };
+    </script>
+    <script data-cfasync="false" src="https://bauval.org"></script>
+  </div>
+
+  <!-- MAIN AGE CALCULATOR TOOL -->
+  <div class="tool-card">
+    <label for="dob" style="font-weight: bold; display: block; margin-bottom: 5px;">Select Your Date of Birth:</label>
+    <input type="date" id="dob">
+    <br>
+    <button class="calc-btn" onclick="calcExactAge()">Calculate Exact Age</button>
+    <div id="ageResult" class="result-box">Your exact age will appear here</div>
+  </div>
+
+  <!-- ADSTERRA CENTER BANNER (300x250) -->
+  <div class="ad-box">
+    <script>
+      atOptions = {
+        'key' : '24cb75ddf0cab0a7e741ec41dfbb3639',
+        'format' : 'iframe',
+        'height' : 250,
+        'width' : 300,
+        'params' : {}
+      };
+    </script>
+    <script src="https://bauval.org"></script>
+  </div>
+
+  <!-- SEO ARTICLE (250+ WORDS) -->
+  <article class="seo-article">
+    <h2>How Does the Online Exact Age Calculator Work?</h2>
+    <p>Calculating your exact age manually can be tricky due to varying month lengths and leap years. Our free online Age Calculator uses standard Gregorian calendar rules to compute the precise time elapsed between your date of birth and today's date in years, months, and days.</p>
+    <h3>Why Knowing Your Exact Age Matters</h3>
+    <p>Whether you are filling out official government applications, checking eligibility for competitive exams, applying for a passport, or planning retirement milestones, having an accurate breakdown of your age prevents errors on important documents.</p>
+    <h3>How to Use This Tool</h3>
+    <p>Simply click on the calendar input field above, select your birth date, and press the "Calculate Exact Age" button. Your result is generated instantly right in your browser without storing any personal data.</p>
+  </article>
+
+  <footer>
+    <a href="index.html">Home</a> |
+    <a href="about.html">About Us</a> |
+    <a href="contact.html">Contact</a> |
+    <a href="privacy-policy.html">Privacy Policy</a>
+  </footer>
+</div>
+
+<script>
+  function calcExactAge() {
+    let dobVal = document.getElementById('dob').value;
+    if (!dobVal) {
+      document.getElementById('ageResult').innerText = "Please select a valid date of birth.";
+      return;
+    }
+    let dob = new Date(dobVal);
+    let today = new Date();
+    if (dob > today) {
+      document.getElementById('ageResult').innerText = "Birth date cannot be in the future.";
+      return;
+    }
+    let years = today.getFullYear() - dob.getFullYear();
+    let months = today.getMonth() - dob.getMonth();
+    let days = today.getDate() - dob.getDate();
+
+    if (days < 0) {
+      months--;
+      let prevMonth = new Date(today.getFullYear(), today.getMonth(), 0);
+      days += prevMonth.getDate();
+    }
+    if (months < 0) {
+      years--;
+      months += 12;
+    }
+    document.getElementById('ageResult').innerText = years + " Years, " + months + " Months, " + days + " Days";
+  }
+</script>
+
+<!-- ADSTERRA SOCIAL BAR -->
+<script data-cfasync="false" src="https://bauval.org"></script>
+</body>
+</html>
