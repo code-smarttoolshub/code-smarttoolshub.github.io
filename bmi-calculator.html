@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Free Online BMI Calculator (Body Mass Index) - Smart Tools Hub</title>
+  <meta name="description" content="Calculate your Body Mass Index (BMI) instantly using your height and weight with our free online BMI Calculator tool.">
+  <style>
+    body { font-family: 'Segoe UI', sans-serif; background: #EBF0F5; margin: 0; padding: 20px; color: #333; }
+    .container { max-width: 850px; margin: 0 auto; }
+    header { background: linear-gradient(135deg, #1e3a8a, #2563eb); color: #fff; text-align: center; padding: 20px; border-radius: 12px; margin-bottom: 15px; }
+    .back-btn { display: inline-block; background: #fff; color: #1e3a8a; text-decoration: none; padding: 8px 16px; border-radius: 6px; font-weight: bold; margin-bottom: 10px; font-size: 14px; }
+    .ad-box { text-align: center; margin: 15px auto; overflow-x: auto; }
+    .tool-card { background: #fff; padding: 25px; border-radius: 12px; box-shadow: 0 4px 12px rgba(0,0,0,0.08); text-align: center; }
+    .input-group { margin: 12px 0; }
+    input[type="number"] { padding: 12px; border: 1px solid #ccc; border-radius: 8px; font-size: 16px; width: 220px; max-width: 100%; }
+    .calc-btn { background: #2563eb; color: #fff; border: none; padding: 12px 24px; border-radius: 8px; font-size: 16px; font-weight: bold; cursor: pointer; margin-top: 10px; }
+    .calc-btn:hover { background: #1e3a8a; }
+    .result-box { margin-top: 20px; font-size: 20px; font-weight: bold; color: #1e3a8a; background: #f8fafc; padding: 15px; border-radius: 8px; }
+    .seo-article { background: #fff; padding: 25px; border-radius: 12px; margin-top: 20px; line-height: 1.6; color: #444; box-shadow: 0 4px 12px rgba(0,0,0,0.05); }
+    .seo-article h2 { color: #1e3a8a; margin-top: 0; }
+    footer { text-align: center; margin-top: 25px; font-size: 14px; color: #666; }
+    footer a { color: #2563eb; text-decoration: none; margin: 0 10px; }
+  </style>
+</head>
+<body>
+
+<div class="container">
+  <header>
+    <a href="index.html" class="back-btn">⬅ Back to All 50+ Tools</a>
+    <h1 style="margin: 5px 0; font-size: 26px;">⚖️ Free Online BMI Calculator</h1>
+    <p style="margin: 0; font-size: 14px; opacity: 0.9;">Check your Body Mass Index and healthy weight category instantly</p>
+  </header>
+
+  <!-- ADSTERRA TOP BANNER (728x90) -->
+  <div class="ad-box">
+    <script>
+      atOptions = {
+        'key' : 'e1448b1169f5f791fa97f1d7e7c4381e',
+        'format' : 'iframe',
+        'height' : 90,
+        'width' : 728,
+        'params' : {}
+      };
+    </script>
+    <script data-cfasync="false" src="https://bauval.org"></script>
+  </div>
+
+  <!-- MAIN BMI CALCULATOR TOOL -->
+  <div class="tool-card">
+    <div class="input-group">
+      <input type="number" id="weightKg" placeholder="Weight in kg (e.g. 70)">
+    </div>
+    <div class="input-group">
+      <input type="number" id="heightCm" placeholder="Height in cm (e.g. 175)">
+    </div>
+    <button class="calc-btn" onclick="calcBMI()">Calculate BMI</button>
+    <div id="bmiResult" class="result-box">Your BMI result will appear here</div>
+  </div>
+
+  <!-- ADSTERRA CENTER BANNER (300x250) -->
+  <div class="ad-box">
+    <script>
+      atOptions = {
+        'key' : '24cb75ddf0cab0a7e741ec41dfbb3639',
+        'format' : 'iframe',
+        'height' : 250,
+        'width' : 300,
+        'params' : {}
+      };
+    </script>
+    <script src="https://bauval.org"></script>
+  </div>
+
+  <!-- SEO ARTICLE (250+ WORDS) -->
+  <article class="seo-article">
+    <h2>What Is Body Mass Index (BMI)?</h2>
+    <p>Body Mass Index (BMI) is a widely used screening measurement that estimates whether a person has a healthy body weight for their height. It is calculated by dividing a person's weight in kilograms by the square of their height in meters (kg/m²).</p>
+    <h3>Standard Adult BMI Categories</h3>
+    <p>According to the World Health Organization (WHO), adult BMI values fall into four main categories: Underweight (below 18.5), Normal or Healthy Weight (18.5 to 24.9), Overweight (25.0 to 29.9), and Obesity (30.0 or higher).</p>
+    <h3>Limitations to Keep in Mind</h3>
+    <p>While BMI is a helpful general indicator for most adults, it does not directly measure body fat percentage or distinguish between muscle mass and fat. Athletes with high muscle mass may have a high BMI despite having low body fat. Always consult a healthcare professional for personalized fitness or medical guidance.</p>
+  </article>
+
+  <footer>
+    <a href="index.html">Home</a> |
+    <a href="about.html">About Us</a> |
+    <a href="contact.html">Contact</a> |
+    <a href="privacy-policy.html">Privacy Policy</a>
+  </footer>
+</div>
+
+<script>
+  function calcBMI() {
+    let w = parseFloat(document.getElementById('weightKg').value);
+    let h = parseFloat(document.getElementById('heightCm').value) / 100;
+    if (!w || !h || w <= 0 || h <= 0) {
+      document.getElementById('bmiResult').innerText = "Please enter valid weight and height.";
+      return;
+    }
+    let bmi = (w / (h * h)).toFixed(1);
+    let category = "";
+    if (bmi < 18.5) category = "Underweight";
+    else if (bmi < 25) category = "Normal Weight";
+    else if (bmi < 30) category = "Overweight";
+    else category = "Obesity";
+    document.getElementById('bmiResult').innerText = "Your BMI: " + bmi + " (" + category + ")";
+  }
+</script>
+
+<!-- ADSTERRA SOCIAL BAR -->
+<script data-cfasync="false" src="https://bauval.org"></script>
+</body>
+</html>
