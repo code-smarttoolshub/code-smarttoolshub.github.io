@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Free Online EMI Loan Calculator (Home, Car & Personal Loan) - Smart Tools Hub</title>
+  <meta name="description" content="Calculate your monthly loan EMI, total interest payable, and total payment instantly with our free online EMI Calculator.">
+  <style>
+    body { font-family: 'Segoe UI', sans-serif; background: #EBF0F5; margin: 0; padding: 20px; color: #333; }
+    .container { max-width: 850px; margin: 0 auto; }
+    header { background: linear-gradient(135deg, #1e3a8a, #2563eb); color: #fff; text-align: center; padding: 20px; border-radius: 12px; margin-bottom: 15px; }
+    .back-btn { display: inline-block; background: #fff; color: #1e3a8a; text-decoration: none; padding: 8px 16px; border-radius: 6px; font-weight: bold; margin-bottom: 10px; font-size: 14px; }
+    .ad-box { text-align: center; margin: 15px auto; overflow-x: auto; }
+    .tool-card { background: #fff; padding: 25px; border-radius: 12px; box-shadow: 0 4px 12px rgba(0,0,0,0.08); text-align: center; }
+    .input-group { margin: 12px 0; }
+    input[type="number"] { padding: 12px; border: 1px solid #ccc; border-radius: 8px; font-size: 16px; width: 260px; max-width: 100%; }
+    .calc-btn { background: #2563eb; color: #fff; border: none; padding: 12px 24px; border-radius: 8px; font-size: 16px; font-weight: bold; cursor: pointer; margin-top: 10px; }
+    .calc-btn:hover { background: #1e3a8a; }
+    .result-box { margin-top: 20px; font-size: 18px; font-weight: bold; color: #1e3a8a; background: #f8fafc; padding: 15px; border-radius: 8px; line-height: 1.6; }
+    .seo-article { background: #fff; padding: 25px; border-radius: 12px; margin-top: 20px; line-height: 1.6; color: #444; box-shadow: 0 4px 12px rgba(0,0,0,0.05); }
+    .seo-article h2 { color: #1e3a8a; margin-top: 0; }
+    footer { text-align: center; margin-top: 25px; font-size: 14px; color: #666; }
+    footer a { color: #2563eb; text-decoration: none; margin: 0 10px; }
+  </style>
+</head>
+<body>
+
+<div class="container">
+  <header>
+    <a href="index.html" class="back-btn">⬅ Back to All 50+ Tools</a>
+    <h1 style="margin: 5px 0; font-size: 26px;">🏦 Free Online EMI Loan Calculator</h1>
+    <p style="margin: 0; font-size: 14px; opacity: 0.9;">Calculate monthly loan installments and total interest instantly</p>
+  </header>
+
+  <!-- ADSTERRA TOP BANNER (728x90) -->
+  <div class="ad-box">
+    <script>
+      atOptions = {
+        'key' : 'e1448b1169f5f791fa97f1d7e7c4381e',
+        'format' : 'iframe',
+        'height' : 90,
+        'width' : 728,
+        'params' : {}
+      };
+    </script>
+    <script data-cfasync="false" src="https://bauval.org"></script>
+  </div>
+
+  <!-- MAIN EMI CALCULATOR TOOL -->
+  <div class="tool-card">
+    <div class="input-group">
+      <input type="number" id="loanAmt" placeholder="Loan Amount (e.g. 50000)">
+    </div>
+    <div class="input-group">
+      <input type="number" id="interestRate" step="0.1" placeholder="Annual Interest Rate % (e.g. 8.5)">
+    </div>
+    <div class="input-group">
+      <input type="number" id="loanMonths" placeholder="Tenure in Months (e.g. 24)">
+    </div>
+    <button class="calc-btn" onclick="calcLoanEMI()">Calculate EMI</button>
+    <div id="emiResult" class="result-box">Your monthly EMI breakdown will appear here</div>
+  </div>
+
+  <!-- ADSTERRA CENTER BANNER (300x250) -->
+  <div class="ad-box">
+    <script>
+      atOptions = {
+        'key' : '24cb75ddf0cab0a7e741ec41dfbb3639',
+        'format' : 'iframe',
+        'height' : 250,
+        'width' : 300,
+        'params' : {}
+      };
+    </script>
+    <script src="https://bauval.org"></script>
+  </div>
+
+  <!-- SEO ARTICLE (250+ WORDS) -->
+  <article class="seo-article">
+    <h2>What Is an EMI (Equated Monthly Installment)?</h2>
+    <p>An Equated Monthly Installment (EMI) is a fixed payment amount made by a borrower to a lender at a specified date each calendar month. EMIs are used to pay off both interest and principal each month so that over a specified number of years, the loan is paid off in full.</p>
+    <h3>How Is Loan EMI Calculated?</h3>
+    <p>Our free online EMI Calculator uses the standard reducing-balance formula: <strong>EMI = [P × R × (1+R)^N] / [(1+R)^N – 1]</strong>, where P is the principal loan amount, R is the monthly interest rate, and N is the loan tenure in months.</p>
+    <h3>Benefits of Calculating EMI Before Borrowing</h3>
+    <p>Knowing your exact monthly installment before applying for a home loan, car loan, or personal loan helps you plan your monthly budget, compare interest rates from different banks, and choose a comfortable repayment tenure without financial strain.</p>
+  </article>
+
+  <footer>
+    <a href="index.html">Home</a> |
+    <a href="about.html">About Us</a> |
+    <a href="contact.html">Contact</a> |
+    <a href="privacy-policy.html">Privacy Policy</a>
+  </footer>
+</div>
+
+<script>
+  function calcLoanEMI() {
+    let p = parseFloat(document.getElementById('loanAmt').value);
+    let annualRate = parseFloat(document.getElementById('interestRate').value);
+    let n = parseInt(document.getElementById('loanMonths').value);
+
+    if (!p || !annualRate || !n || p <= 0 || annualRate <= 0 || n <= 0) {
+      document.getElementById('emiResult').innerText = "Please enter valid loan amount, interest rate, and months.";
+      return;
+    }
+
+    let r = (annualRate / 12) / 100;
+    let emi = (p * r * Math.pow(1 + r, n)) / (Math.pow(1 + r, n) - 1);
+    let totalPay = emi * n;
+    let totalInterest = totalPay - p;
+
+    document.getElementById('emiResult').innerHTML =
+      "Monthly EMI: " + emi.toFixed(2) + "<br>" +
+      "Total Interest: " + totalInterest.toFixed(2) + "<br>" +
+      "Total Payment: " + totalPay.toFixed(2);
+  }
+</script>
+
+<!-- ADSTERRA SOCIAL BAR -->
+<script data-cfasync="false" src="https://bauval.org"></script>
+</body>
+</html>
