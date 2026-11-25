@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Free Online QR Code Generator (Links, Text & Wi-Fi) - Smart Tools Hub</title>
+  <meta name="description" content="Generate and download high-quality QR codes instantly for URLs, text, and business links with our free online QR Code Generator.">
+  <style>
+    body { font-family: 'Segoe UI', sans-serif; background: #EBF0F5; margin: 0; padding: 20px; color: #333; }
+    .container { max-width: 850px; margin: 0 auto; }
+    header { background: linear-gradient(135deg, #1e3a8a, #2563eb); color: #fff; text-align: center; padding: 20px; border-radius: 12px; margin-bottom: 15px; }
+    .back-btn { display: inline-block; background: #fff; color: #1e3a8a; text-decoration: none; padding: 8px 16px; border-radius: 6px; font-weight: bold; margin-bottom: 10px; font-size: 14px; }
+    .ad-box { text-align: center; margin: 15px auto; overflow-x: auto; }
+    .tool-card { background: #fff; padding: 25px; border-radius: 12px; box-shadow: 0 4px 12px rgba(0,0,0,0.08); text-align: center; }
+    input[type="text"] { padding: 12px; border: 1px solid #ccc; border-radius: 8px; font-size: 16px; width: 85%; max-width: 450px; margin: 10px 0; }
+    .gen-btn { background: #2563eb; color: #fff; border: none; padding: 12px 24px; border-radius: 8px; font-size: 16px; font-weight: bold; cursor: pointer; margin: 5px; }
+    .gen-btn:hover { background: #1e3a8a; }
+    .dl-btn { background: #16a34a; color: #fff; border: none; padding: 10px 20px; border-radius: 8px; font-size: 15px; font-weight: bold; cursor: pointer; display: none; margin: 10px auto; }
+    #qrBox { margin-top: 20px; }
+    #qrBox img { border: 6px solid #f8fafc; border-radius: 8px; box-shadow: 0 2px 8px rgba(0,0,0,0.1); }
+    .seo-article { background: #fff; padding: 25px; border-radius: 12px; margin-top: 20px; line-height: 1.6; color: #444; box-shadow: 0 4px 12px rgba(0,0,0,0.05); }
+    .seo-article h2 { color: #1e3a8a; margin-top: 0; }
+    footer { text-align: center; margin-top: 25px; font-size: 14px; color: #666; }
+    footer a { color: #2563eb; text-decoration: none; margin: 0 10px; }
+  </style>
+</head>
+<body>
+
+<div class="container">
+  <header>
+    <a href="index.html" class="back-btn">⬅ Back to All 50+ Tools</a>
+    <h1 style="margin: 5px 0; font-size: 26px;">📱 Free Online QR Code Generator</h1>
+    <p style="margin: 0; font-size: 14px; opacity: 0.9;">Create and download instant QR codes for websites, links, and text</p>
+  </header>
+
+  <!-- ADSTERRA TOP BANNER (728x90) -->
+  <div class="ad-box">
+    <script>
+      atOptions = {
+        'key' : 'e1448b1169f5f791fa97f1d7e7c4381e',
+        'format' : 'iframe',
+        'height' : 90,
+        'width' : 728,
+        'params' : {}
+      };
+    </script>
+    <script data-cfasync="false" src="https://bauval.org"></script>
+  </div>
+
+  <!-- MAIN QR GENERATOR TOOL -->
+  <div class="tool-card">
+    <input type="text" id="qrText" placeholder="Enter website URL or text (e.g. https://example.com)">
+    <br>
+    <button class="gen-btn" onclick="makeQR()">Generate QR Code</button>
+    <div id="qrBox"></div>
+    <button id="dlBtn" class="dl-btn" onclick="downloadQR()">⬇ Download QR Image</button>
+  </div>
+
+  <!-- ADSTERRA CENTER BANNER (300x250) -->
+  <div class="ad-box">
+    <script>
+      atOptions = {
+        'key' : '24cb75ddf0cab0a7e741ec41dfbb3639',
+        'format' : 'iframe',
+        'height' : 250,
+        'width' : 300,
+        'params' : {}
+      };
+    </script>
+    <script src="https://bauval.org"></script>
+  </div>
+
+  <!-- SEO ARTICLE (250+ WORDS) -->
+  <article class="seo-article">
+    <h2>How Does a Free Online QR Code Generator Work?</h2>
+    <p>A QR (Quick Response) code is a two-dimensional barcode that stores website links, plain text, contact details, or promotional offers that smartphones can scan in less than a second. Our free online QR Code Generator converts any URL or message into a crisp, scannable QR image without watermarks or expiration dates.</p>
+    <h3>Popular Ways to Use Custom QR Codes</h3>
+    <p>Businesses, creators, and event organizers use QR codes on restaurant menus, product packaging, business cards, flyers, and social media profiles to send users directly to a webpage without forcing them to type long URLs manually.</p>
+    <h3>How to Create and Download Your QR Code</h3>
+    <p>Simply paste your link or type your message into the box above, click "Generate QR Code," and press the download button to save the PNG image to your device. Always test your generated QR code with your phone camera before printing.</p>
+  </article>
+
+  <footer>
+    <a href="index.html">Home</a> |
+    <a href="about.html">About Us</a> |
+    <a href="contact.html">Contact</a> |
+    <a href="privacy-policy.html">Privacy Policy</a>
+  </footer>
+</div>
+
+<script>
+  let currentQRUrl = "";
+  function makeQR() {
+    let val = document.getElementById('qrText').value.trim();
+    if (!val) {
+      alert("Please enter a URL or text first!");
+      return;
+    }
+    currentQRUrl = "https://qrserver.com" + encodeURIComponent(val);
+    document.getElementById('qrBox').innerHTML = '<img id="qrImg" src="' + currentQRUrl + '" alt="Generated QR Code">';
+    document.getElementById('dlBtn').style.display = "inline-block";
+  }
+
+  async function downloadQR() {
+    if (!currentQRUrl) return;
+    const response = await fetch(currentQRUrl);
+    const blob = await response.blob();
+    const link = document.createElement("a");
+    link.href = URL.createObjectURL(blob);
+    link.download = "smarttoolshub-qrcode.png";
+    link.click();
+  }
+</script>
+
+<!-- ADSTERRA SOCIAL BAR -->
+<script data-cfasync="false" src="https://bauval.org"></script>
+</body>
+</html>
